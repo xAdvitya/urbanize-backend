@@ -17,7 +17,7 @@ console.log('🚀', '@' + pkg.author.name + '/' + pkg.name, 'v' + pkg.version);
 const isDev: boolean = process.env.NODE_ENV == 'production';
 console.log(isDev ? '🚀 Production Mode' : '🚀 Development Mode');
 const configs = new configStore(isDev);
-const configKeys: IConfigKeys = await configs.getConfigStore() as IConfigKeys;
+const configKeys: IConfigKeys = (await configs.getConfigStore()) as IConfigKeys;
 
 hgqlInit();
 

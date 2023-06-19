@@ -3,7 +3,7 @@ import multer from 'multer';
 import multerS3 from 'multer-s3';
 import path from 'path';
 import napiNanoId from 'napi-nanoid';
-import { configKeys } from '..'; 
+import { configKeys } from '..';
 interface UploadFactoryOptions {
 	region: string;
 	bucket: string;

@@ -3,10 +3,10 @@
 	"version": "1.0.0",
 	"description": "Backend Repo Template",
 	"main": "index.ts",
-	"repository": "https://github.com/<username>/<repo-name>.git",
+	"repository": "https://github.com/xAdvitya/",
 	"author": {
-		"email": "<email>",
-		"name": "<name>",
+		"email": "advityasharma21@gmail.com",
+		"name": "xAdvitya",
 		"url": "<url>"
 	},
 	"license": "ISC",

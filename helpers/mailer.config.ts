@@ -1,4 +1,4 @@
-import { configKeys } from "..";
+import { configKeys } from '..';
 
 export interface MailConfig {
 	host?: string;

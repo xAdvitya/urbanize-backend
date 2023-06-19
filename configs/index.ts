@@ -18,7 +18,7 @@ export interface IConfigKeys {
 	MAIL_PASS: string;
 	MAIL_LOGGER: boolean;
 	MAIL_FROM_EMAIL: string;
-	MAIL_FROM_NAME: string;	
+	MAIL_FROM_NAME: string;
 	CACHE_ENV: string;
 	REDIS_URL: string;
 }
