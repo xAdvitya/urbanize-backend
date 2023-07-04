@@ -1,0 +1,7 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE OR REPLACE VIEW "public"."online_users" AS
+--  SELECT users.id,
+--     users.last_seen
+--    FROM users
+--   WHERE (users.last_seen >= (now() - '00:00:30'::interval));

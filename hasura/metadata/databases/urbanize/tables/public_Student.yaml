@@ -1,0 +1,3 @@
+table:
+  name: Student
+  schema: public
