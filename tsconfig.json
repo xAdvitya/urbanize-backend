@@ -1,24 +1,12 @@
 {
-	"compilerOptions": {
-		"lib": ["es2018", "es5", "dom"],
-		"typeRoots": ["node_modules/@types", "./types"],
-		"resolveJsonModule": true,
-		"esModuleInterop": true,
-		"target": "ES2017",
-		"strict": true,
-		"module": "ESNext",
-		"moduleResolution": "node",
-		"outDir": "./build",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"declaration": true,
-		"sourceMap": false,
-		"noImplicitAny": false
-	},
-	"exclude": ["./node_modules/**/*", "./build/**/*"],
-	"include": ["./**/*.ts", "./**/*.tsx", "./**/*.json", "./**/*.js"],
-	"ts-node": {
-		"swc": true
-	},
-	"files": ["types/index.d.ts"]
+  "compilerOptions": {
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["node"]
+  }
 }
