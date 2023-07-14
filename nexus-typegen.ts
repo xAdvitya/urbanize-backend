@@ -28,8 +28,18 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthType: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Mutation: {};
   Query: {};
+  User: { // root type
+    email: string; // String!
+    id: number; // Int!
+    password: string; // String!
+    username: string; // String!
+  }
   product: { // root type
     available: boolean; // Boolean!
     description: string; // String!
@@ -50,11 +60,22 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthType: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Mutation: { // field return type
     createProduct: NexusGenRootTypes['product']; // product!
+    register: NexusGenRootTypes['AuthType']; // AuthType!
   }
   Query: { // field return type
     products: NexusGenRootTypes['product'][]; // [product!]!
+  }
+  User: { // field return type
+    email: string; // String!
+    id: number; // Int!
+    password: string; // String!
+    username: string; // String!
   }
   product: { // field return type
     available: boolean; // Boolean!
@@ -66,11 +87,22 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthType: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
   Mutation: { // field return type name
     createProduct: 'product'
+    register: 'AuthType'
   }
   Query: { // field return type name
     products: 'product'
+  }
+  User: { // field return type name
+    email: 'String'
+    id: 'Int'
+    password: 'String'
+    username: 'String'
   }
   product: { // field return type name
     available: 'Boolean'
@@ -88,6 +120,11 @@ export interface NexusGenArgTypes {
       description: string; // String!
       name: string; // String!
       price: number; // Float!
+    }
+    register: { // args
+      email: string; // String!
+      password: string; // String!
+      username: string; // String!
     }
   }
 }

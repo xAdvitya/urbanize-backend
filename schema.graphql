@@ -2,12 +2,25 @@
 ### Do not make changes to this file directly
 
 
+type AuthType {
+  token: String!
+  user: User!
+}
+
 type Mutation {
   createProduct(available: Boolean!, description: String!, name: String!, price: Float!): product!
+  register(email: String!, password: String!, username: String!): AuthType!
 }
 
 type Query {
   products: [product!]!
+}
+
+type User {
+  email: String!
+  id: Int!
+  password: String!
+  username: String!
 }
 
 type product {

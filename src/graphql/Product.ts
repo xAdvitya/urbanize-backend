@@ -7,7 +7,9 @@ import {
   objectType,
   stringArg,
 } from 'nexus';
-import { NexusGenObjects } from '../../nexus-typegen';
+// import { NexusGenObjects } from '../../nexus-typegen';
+import { Product } from '../entities/Product';
+import { context } from 'src/types/context';
 
 export const ProductType = objectType({
   name: 'product',
@@ -20,30 +22,32 @@ export const ProductType = objectType({
   },
 });
 
-let products: NexusGenObjects['product'][] = [
-  {
-    id: 1,
-    name: 'earphone',
-    description: 'new earphones',
-    available: true,
-    price: 4000,
-  },
-  {
-    id: 2,
-    name: 'phone',
-    description: 'new phone',
-    available: true,
-    price: 90000,
-  },
-];
+// let products: NexusGenObjects['product'][] = [
+//   {
+//     id: 1,
+//     name: 'earphone',
+//     description: 'new earphones',
+//     available: true,
+//     price: 4000,
+//   },
+//   {
+//     id: 2,
+//     name: 'phone',
+//     description: 'new phone',
+//     available: true,
+//     price: 90000,
+//   },
+// ];
 
 export const productQuery = extendType({
   type: 'Query',
   definition(t) {
     t.nonNull.list.nonNull.field('products', {
       type: 'product',
-      resolve(_parent, _args, _context, _info) {
-        return products;
+      resolve(_parent, _args, _context: context, _info): Promise<Product[]> {
+        return Product.find();
+        // const { conn } = context;
+        // return conn.query('select * from Product');
       },
     });
   },
@@ -60,18 +64,9 @@ export const createProductMutation = extendType({
         available: nonNull(booleanArg()),
         price: nonNull(floatArg()),
       },
-      resolve(_parent, _args, _context, _info) {
+      resolve(_parent, _args, _context, _info): Promise<Product> {
         const { name, description, available, price } = _args;
-        const product = {
-          name,
-          description,
-          available,
-          id: products.length + 1,
-          price,
-        };
-        products.push(product);
-        console.log(products);
-        return product;
+        return Product.create({ name, available, price, description }).save();
       },
     });
   },

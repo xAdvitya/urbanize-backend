@@ -1,28 +1,36 @@
 import {
   BaseEntity,
   Entity,
-  PrimaryColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  PrimaryGeneratedColumn,
+  ManyToOne,
 } from 'typeorm';
+import { User } from './User';
 
 @Entity()
 export class Product extends BaseEntity {
-  @PrimaryColumn()
-  id: number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  dscription: string;
+  description!: string;
 
   @Column({ type: 'decimal' })
-  price: number;
+  price!: number;
 
   @Column()
-  available: boolean;
+  available!: boolean;
+
+  @Column()
+  creatorId!: number;
+
+  @ManyToOne(() => User, (user) => user.products)
+  creator: User;
 
   @CreateDateColumn()
   createdAt: Date;
