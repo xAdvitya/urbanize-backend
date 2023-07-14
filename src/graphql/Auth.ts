@@ -20,6 +20,31 @@ export const AuthType = objectType({
 export const AuthMutation = extendType({
   type: 'Mutation',
   definition(t) {
+    t.nonNull.field('login', {
+      type: 'AuthType',
+      args: {
+        username: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, _context: context, _info) {
+        const { username, password } = args;
+        const user = await User.findOne({ where: { username } });
+        if (!user) {
+          throw new Error('user not found');
+        }
+        const isValid = await argon2.verify(user.password, password);
+
+        if (!isValid) {
+          throw new Error('Invalid cred');
+        }
+        const token = jwt.sign(
+          { userId: user.id },
+          process.env.JWT_SECRET as jwt.Secret
+        );
+
+        return { token, user };
+      },
+    });
     t.nonNull.field('register', {
       type: 'AuthType',
       args: {
