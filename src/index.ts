@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import typeormConfig from './typeorm.config';
 import { context } from './types/context';
 import { User } from './entities/User';
+import { Context } from 'nexus-plugin-prisma/dist/utils';
+import { auth } from './middlewares/auth';
 
 dotenv.config();
 
@@ -26,7 +28,12 @@ const boot = async () => {
 
   const server = new ApolloServer({
     schema,
-    context: (): context => ({ conn }),
+    context: ({ req }): context => {
+      const token = req?.headers?.authorization
+        ? auth(req.headers.authorization)
+        : null;
+      return { conn, userId: token?.userId };
+    },
   });
 
   const { url } = await server.listen(process.env.PORT);

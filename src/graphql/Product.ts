@@ -7,43 +7,33 @@ import {
   objectType,
   stringArg,
 } from 'nexus';
-// import { NexusGenObjects } from '../../nexus-typegen';
 import { Product } from '../entities/Product';
 import { context } from 'src/types/context';
+import { User } from '../entities/User';
 
 export const ProductType = objectType({
-  name: 'product',
+  name: 'Product',
   definition(t) {
     t.nonNull.int('id'),
       t.nonNull.string('name'),
       t.nonNull.string('description'),
-      t.nonNull.boolean('available');
-    t.nonNull.float('price');
+      t.nonNull.boolean('available'),
+      t.nonNull.float('price'),
+      t.nonNull.int('creatorId'),
+      t.field('createdBy', {
+        type: 'User',
+        resolve(parent, _args, _context: context, _info): Promise<User | null> {
+          return User.findOne({ where: { id: parent.creatorId } });
+        },
+      });
   },
 });
-
-// let products: NexusGenObjects['product'][] = [
-//   {
-//     id: 1,
-//     name: 'earphone',
-//     description: 'new earphones',
-//     available: true,
-//     price: 4000,
-//   },
-//   {
-//     id: 2,
-//     name: 'phone',
-//     description: 'new phone',
-//     available: true,
-//     price: 90000,
-//   },
-// ];
 
 export const productQuery = extendType({
   type: 'Query',
   definition(t) {
     t.nonNull.list.nonNull.field('products', {
-      type: 'product',
+      type: 'Product',
       resolve(_parent, _args, _context: context, _info): Promise<Product[]> {
         return Product.find();
         // const { conn } = context;
@@ -57,16 +47,28 @@ export const createProductMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('createProduct', {
-      type: 'product',
+      type: 'Product',
       args: {
         name: nonNull(stringArg()),
         description: nonNull(stringArg()),
         available: nonNull(booleanArg()),
         price: nonNull(floatArg()),
       },
-      resolve(_parent, _args, _context, _info): Promise<Product> {
-        const { name, description, available, price } = _args;
-        return Product.create({ name, available, price, description }).save();
+      resolve(_parent, args, context, _info): Promise<Product> {
+        const { name, description, available, price } = args;
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error("can't create product without logging in");
+        }
+
+        return Product.create({
+          name,
+          available,
+          price,
+          description,
+          creatorId: userId,
+        }).save();
       },
     });
   },

@@ -33,19 +33,20 @@ export interface NexusGenObjects {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: {};
+  Product: { // root type
+    available: boolean; // Boolean!
+    creatorId: number; // Int!
+    description: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    price: number; // Float!
+  }
   Query: {};
   User: { // root type
     email: string; // String!
     id: number; // Int!
     password: string; // String!
     username: string; // String!
-  }
-  product: { // root type
-    available: boolean; // Boolean!
-    description: string; // String!
-    id: number; // Int!
-    name: string; // String!
-    price: number; // Float!
   }
 }
 
@@ -65,25 +66,27 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
-    createProduct: NexusGenRootTypes['product']; // product!
+    createProduct: NexusGenRootTypes['Product']; // Product!
     login: NexusGenRootTypes['AuthType']; // AuthType!
     register: NexusGenRootTypes['AuthType']; // AuthType!
   }
+  Product: { // field return type
+    available: boolean; // Boolean!
+    createdBy: NexusGenRootTypes['User'] | null; // User
+    creatorId: number; // Int!
+    description: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    price: number; // Float!
+  }
   Query: { // field return type
-    products: NexusGenRootTypes['product'][]; // [product!]!
+    products: NexusGenRootTypes['Product'][]; // [Product!]!
   }
   User: { // field return type
     email: string; // String!
     id: number; // Int!
     password: string; // String!
     username: string; // String!
-  }
-  product: { // field return type
-    available: boolean; // Boolean!
-    description: string; // String!
-    id: number; // Int!
-    name: string; // String!
-    price: number; // Float!
   }
 }
 
@@ -93,25 +96,27 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
-    createProduct: 'product'
+    createProduct: 'Product'
     login: 'AuthType'
     register: 'AuthType'
   }
+  Product: { // field return type name
+    available: 'Boolean'
+    createdBy: 'User'
+    creatorId: 'Int'
+    description: 'String'
+    id: 'Int'
+    name: 'String'
+    price: 'Float'
+  }
   Query: { // field return type name
-    products: 'product'
+    products: 'Product'
   }
   User: { // field return type name
     email: 'String'
     id: 'Int'
     password: 'String'
     username: 'String'
-  }
-  product: { // field return type name
-    available: 'Boolean'
-    description: 'String'
-    id: 'Int'
-    name: 'String'
-    price: 'Float'
   }
 }
 
