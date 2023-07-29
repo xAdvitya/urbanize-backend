@@ -48,6 +48,10 @@ export interface NexusGenObjects {
     password: string; // String!
     username: string; // String!
   }
+  Wishlist: { // root type
+    id: number; // Int!
+    product: NexusGenRootTypes['Product']; // Product!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -80,6 +84,7 @@ export interface NexusGenFieldTypes {
     price: number; // Float!
   }
   Query: { // field return type
+    Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
   }
   User: { // field return type
@@ -87,6 +92,10 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     password: string; // String!
     username: string; // String!
+  }
+  Wishlist: { // field return type
+    id: number; // Int!
+    product: NexusGenRootTypes['Product']; // Product!
   }
 }
 
@@ -110,6 +119,7 @@ export interface NexusGenFieldTypeNames {
     price: 'Float'
   }
   Query: { // field return type name
+    Wishlist: 'Wishlist'
     products: 'Product'
   }
   User: { // field return type name
@@ -117,6 +127,10 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     password: 'String'
     username: 'String'
+  }
+  Wishlist: { // field return type name
+    id: 'Int'
+    product: 'Product'
   }
 }
 

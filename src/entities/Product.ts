@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  OneToMany,
   ManyToOne,
 } from 'typeorm';
 import { User } from './User';
+import { Wishlist } from './Wishlist';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -31,6 +33,9 @@ export class Product extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.products)
   creator: User;
+
+  @OneToMany(() => Wishlist, (wishlist) => wishlist.product)
+  wishlist: Wishlist[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -8,23 +8,27 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Product } from './Product';
+import { Wishlist } from './Wishlist';
 
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({unique:true})
+  @Column({ unique: true })
   username!: string;
 
   @Column()
   password!: string;
 
-  @Column({unique:true})
+  @Column({ unique: true })
   email!: string;
 
   @OneToMany(() => Product, (product) => product.creator)
   products: Product[];
+
+  @OneToMany(() => Wishlist, (wishlist) => wishlist.creator)
+  wishlist: Wishlist[];
 
   @CreateDateColumn()
   createdAt: Date;

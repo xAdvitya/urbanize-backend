@@ -24,6 +24,7 @@ type Product {
 }
 
 type Query {
+  Wishlist: [Wishlist!]!
   products: [Product!]!
 }
 
@@ -32,4 +33,9 @@ type User {
   id: Int!
   password: String!
   username: String!
+}
+
+type Wishlist {
+  id: Int!
+  product: Product!
 }
