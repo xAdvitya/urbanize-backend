@@ -8,6 +8,7 @@ type AuthType {
 }
 
 type Mutation {
+  addToWishlist(productId: Int!): Wishlist!
   createProduct(available: Boolean!, description: String!, name: String!, price: Float!): Product!
   login(password: String!, username: String!): AuthType!
   register(email: String!, password: String!, username: String!): AuthType!

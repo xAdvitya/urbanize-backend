@@ -42,3 +42,34 @@ export const WishlistQuery = extendType({
     });
   },
 });
+
+export const addToWishlistMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('addToWishlist', {
+      type: 'Wishlist',
+      args: {
+        productId: nonNull(intArg()),
+      },
+      resolve: async (_parent, args, context): Promise<Wishlist> => {
+        const { productId } = args;
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error("Can't add product to wishlist without logging in");
+        }
+
+        const product = await Product.findOne({ where: { id: productId } });
+        if (!product) {
+          throw new Error('Product not found');
+        }
+
+        const wishlistItem = Wishlist.create({
+          product,
+          creator: { id: userId },
+        });
+        return wishlistItem.save();
+      },
+    });
+  },
+});

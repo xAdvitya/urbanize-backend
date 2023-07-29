@@ -70,6 +70,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
+    addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
     createProduct: NexusGenRootTypes['Product']; // Product!
     login: NexusGenRootTypes['AuthType']; // AuthType!
     register: NexusGenRootTypes['AuthType']; // AuthType!
@@ -105,6 +106,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    addToWishlist: 'Wishlist'
     createProduct: 'Product'
     login: 'AuthType'
     register: 'AuthType'
@@ -136,6 +138,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addToWishlist: { // args
+      productId: number; // Int!
+    }
     createProduct: { // args
       available: boolean; // Boolean!
       description: string; // String!
