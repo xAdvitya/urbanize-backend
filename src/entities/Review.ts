@@ -8,20 +8,28 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-
 import { User } from './User';
 import { Product } from './Product';
 
 @Entity()
-export class Wishlist extends BaseEntity {
+export class Review extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => User, (user) => user.wishlist)
+  @Column()
+  title!: string;
+
+  @Column()
+  rating!: number;
+
+  @Column()
+  review_text!: string;
+
+  @ManyToOne(() => User, (user) => user.review)
   @JoinColumn({ name: 'creator_id' })
   creator: User;
 
-  @ManyToOne(() => Product, (product) => product.wishlist)
+  @ManyToOne(() => Product, (product) => product.review)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 

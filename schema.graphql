@@ -12,6 +12,7 @@ type Mutation {
   createProduct(available: Boolean!, description: String!, name: String!, price: Float!): Product!
   login(password: String!, username: String!): AuthType!
   register(email: String!, password: String!, username: String!): AuthType!
+  removeFromWishlist(productId: Int!): Boolean!
 }
 
 type Product {

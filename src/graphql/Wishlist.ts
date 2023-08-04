@@ -73,3 +73,47 @@ export const addToWishlistMutation = extendType({
     });
   },
 });
+
+export const removeFromWishlist = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('removeFromWishlist', {
+      type: 'Boolean',
+      args: {
+        productId: nonNull(intArg()),
+      },
+      resolve(_parent, args, context, _info) {
+        const { productId } = args;
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error(
+            "Can't remove product from wishlist without logging in"
+          );
+        }
+        return deleteProductFromWishlist(userId, productId);
+      },
+    });
+  },
+});
+
+async function deleteProductFromWishlist(
+  userId: number,
+  
+  productId: number
+): Promise<boolean> {
+  try {
+    const wishlistItem = await Wishlist.findOne({
+      where: { creator: { id: userId }, product: { id: productId } },
+    });
+
+    if (!wishlistItem) {
+      return false;
+    }
+
+    await wishlistItem.remove();
+    return true;
+  } catch (error) {
+    throw new Error('Error removing product from wishlist');
+  }
+}

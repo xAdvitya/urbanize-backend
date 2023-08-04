@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from './User';
 import { Wishlist } from './Wishlist';
+import { Review } from './Review';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -36,6 +37,9 @@ export class Product extends BaseEntity {
 
   @OneToMany(() => Wishlist, (wishlist) => wishlist.product)
   wishlist: Wishlist[];
+
+  @OneToMany(() => Review, (review) => review.product)
+  review: Review[];
 
   @CreateDateColumn()
   createdAt: Date;

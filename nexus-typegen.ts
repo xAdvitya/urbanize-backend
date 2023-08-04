@@ -74,6 +74,7 @@ export interface NexusGenFieldTypes {
     createProduct: NexusGenRootTypes['Product']; // Product!
     login: NexusGenRootTypes['AuthType']; // AuthType!
     register: NexusGenRootTypes['AuthType']; // AuthType!
+    removeFromWishlist: boolean; // Boolean!
   }
   Product: { // field return type
     available: boolean; // Boolean!
@@ -110,6 +111,7 @@ export interface NexusGenFieldTypeNames {
     createProduct: 'Product'
     login: 'AuthType'
     register: 'AuthType'
+    removeFromWishlist: 'Boolean'
   }
   Product: { // field return type name
     available: 'Boolean'
@@ -155,6 +157,9 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
       username: string; // String!
+    }
+    removeFromWishlist: { // args
+      productId: number; // Int!
     }
   }
 }
