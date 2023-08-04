@@ -80,6 +80,7 @@ export interface NexusGenFieldTypes {
     addReview: NexusGenRootTypes['Review']; // Review!
     addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
     createProduct: NexusGenRootTypes['Product']; // Product!
+    deleteReview: NexusGenRootTypes['Review']; // Review!
     login: NexusGenRootTypes['AuthType']; // AuthType!
     register: NexusGenRootTypes['AuthType']; // AuthType!
     removeFromWishlist: boolean; // Boolean!
@@ -126,6 +127,7 @@ export interface NexusGenFieldTypeNames {
     addReview: 'Review'
     addToWishlist: 'Wishlist'
     createProduct: 'Product'
+    deleteReview: 'Review'
     login: 'AuthType'
     register: 'AuthType'
     removeFromWishlist: 'Boolean'
@@ -179,6 +181,9 @@ export interface NexusGenArgTypes {
       description: string; // String!
       name: string; // String!
       price: number; // Float!
+    }
+    deleteReview: { // args
+      reviewId: number; // Int!
     }
     login: { // args
       password: string; // String!

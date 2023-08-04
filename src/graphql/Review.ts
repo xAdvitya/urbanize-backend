@@ -70,3 +70,34 @@ export const addReviewMutation = extendType({
     });
   },
 });
+
+export const deleteReviewMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('deleteReview', {
+      type: 'Review',
+      args: {
+        reviewId: nonNull(intArg()),
+      },
+      async resolve(_parent, args, context: context): Promise<Review | null> {
+        const { reviewId } = args;
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error(
+            "Can't remove product from wishlist without logging in"
+          );
+        }
+
+        const reviewItem = await Review.findOne({ where: { id: reviewId } });
+
+        if (!reviewItem) {
+          return null;
+        }
+
+        await reviewItem.remove();
+        return reviewItem;
+      },
+    });
+  },
+});

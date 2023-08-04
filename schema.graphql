@@ -11,6 +11,7 @@ type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
   addToWishlist(productId: Int!): Wishlist!
   createProduct(available: Boolean!, description: String!, name: String!, price: Float!): Product!
+  deleteReview(reviewId: Int!): Review!
   login(password: String!, username: String!): AuthType!
   register(email: String!, password: String!, username: String!): AuthType!
   removeFromWishlist(productId: Int!): Boolean!
