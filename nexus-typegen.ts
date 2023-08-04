@@ -42,6 +42,13 @@ export interface NexusGenObjects {
     price: number; // Float!
   }
   Query: {};
+  Review: { // root type
+    createdAt: string; // String!
+    id: number; // Int!
+    rating: number; // Int!
+    review_text: string; // String!
+    title: string; // String!
+  }
   User: { // root type
     email: string; // String!
     id: number; // Int!
@@ -86,8 +93,16 @@ export interface NexusGenFieldTypes {
     price: number; // Float!
   }
   Query: { // field return type
+    Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
+  }
+  Review: { // field return type
+    createdAt: string; // String!
+    id: number; // Int!
+    rating: number; // Int!
+    review_text: string; // String!
+    title: string; // String!
   }
   User: { // field return type
     email: string; // String!
@@ -123,8 +138,16 @@ export interface NexusGenFieldTypeNames {
     price: 'Float'
   }
   Query: { // field return type name
+    Review: 'Review'
     Wishlist: 'Wishlist'
     products: 'Product'
+  }
+  Review: { // field return type name
+    createdAt: 'String'
+    id: 'Int'
+    rating: 'Int'
+    review_text: 'String'
+    title: 'String'
   }
   User: { // field return type name
     email: 'String'
@@ -159,6 +182,11 @@ export interface NexusGenArgTypes {
       username: string; // String!
     }
     removeFromWishlist: { // args
+      productId: number; // Int!
+    }
+  }
+  Query: {
+    Review: { // args
       productId: number; // Int!
     }
   }
