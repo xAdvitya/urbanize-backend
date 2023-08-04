@@ -1,13 +1,4 @@
-import {
-  booleanArg,
-  extendType,
-  floatArg,
-  intArg,
-  nonNull,
-  objectType,
-  stringArg,
-  scalarType,
-} from 'nexus';
+import { extendType, intArg, nonNull, objectType, stringArg } from 'nexus';
 import { Product } from '../entities/Product';
 import { context } from 'src/types/context';
 import { Review } from '../entities/Review';
@@ -43,6 +34,38 @@ export const ReviewQuery = extendType({
           where: { product: { id: productId } },
           relations: ['product'],
         });
+      },
+    });
+  },
+});
+
+export const addReviewMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('addReview', {
+      type: 'Review',
+      args: {
+        productId: nonNull(intArg()),
+        title: nonNull(stringArg()),
+        rating: nonNull(intArg()),
+        review_text: nonNull(stringArg()),
+      },
+      resolve(_parent, args, context, _info): Promise<Review> {
+        const { productId, title, rating, review_text } = args;
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error("Can't add product to wishlist without logging in");
+        }
+
+        const review = Review.create({
+          title,
+          rating,
+          review_text,
+          product: { id: productId },
+        });
+
+        return review.save();
       },
     });
   },
