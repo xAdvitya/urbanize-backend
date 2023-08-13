@@ -19,9 +19,6 @@ export class Order extends BaseEntity {
   @ManyToOne(() => User, (user) => user.order)
   creator: User;
 
-  @ManyToOne(() => Product, (product) => product.order)
-  product: Product;
-
   @Column({ type: 'decimal' })
   price!: number;
 
@@ -30,17 +27,4 @@ export class Order extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @BeforeInsert()
-  async setProductPrice() {
-    if (this.product) {
-      const fetchedProduct = await Product.findOne({
-        where: { id: this.product.id },
-      });
-      if (fetchedProduct) {
-        const productPrice = fetchedProduct.price;
-        this.price = productPrice;
-      }
-    }
-  }
 }

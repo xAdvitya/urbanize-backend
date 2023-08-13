@@ -13,7 +13,7 @@ import {
 import { User } from './User';
 import { Wishlist } from './Wishlist';
 import { Review } from './Review';
-import { Order } from './Order';
+import { OrderItem } from './OrderItem';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -44,8 +44,8 @@ export class Product extends BaseEntity {
   @OneToMany(() => Review, (review) => review.product)
   review: Review[];
 
-  @OneToMany(() => Order, (order) => order.product)
-  order: Order[];
+  @OneToMany(() => OrderItem, (orderitem) => orderitem.product)
+  order: OrderItem[];
 
   @CreateDateColumn()
   createdAt: Date;
