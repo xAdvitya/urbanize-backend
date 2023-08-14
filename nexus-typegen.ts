@@ -33,6 +33,12 @@ export interface NexusGenObjects {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: {};
+  OrderItem: { // root type
+    id: number; // Int!
+    quantity: number; // Int!
+    subtotal: number; // Float!
+    unit_price: number; // Float!
+  }
   Product: { // root type
     available: boolean; // Boolean!
     creatorId: number; // Int!
@@ -85,6 +91,12 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['AuthType']; // AuthType!
     removeFromWishlist: boolean; // Boolean!
   }
+  OrderItem: { // field return type
+    id: number; // Int!
+    quantity: number; // Int!
+    subtotal: number; // Float!
+    unit_price: number; // Float!
+  }
   Product: { // field return type
     available: boolean; // Boolean!
     createdBy: NexusGenRootTypes['User'] | null; // User
@@ -131,6 +143,12 @@ export interface NexusGenFieldTypeNames {
     login: 'AuthType'
     register: 'AuthType'
     removeFromWishlist: 'Boolean'
+  }
+  OrderItem: { // field return type name
+    id: 'Int'
+    quantity: 'Int'
+    subtotal: 'Float'
+    unit_price: 'Float'
   }
   Product: { // field return type name
     available: 'Boolean'

@@ -17,6 +17,13 @@ type Mutation {
   removeFromWishlist(productId: Int!): Boolean!
 }
 
+type OrderItem {
+  id: Int!
+  quantity: Int!
+  subtotal: Float!
+  unit_price: Float!
+}
+
 type Product {
   available: Boolean!
   createdBy: User
