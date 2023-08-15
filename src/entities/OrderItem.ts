@@ -6,10 +6,12 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
   ManyToOne,
+  JoinColumn,
   BeforeInsert,
 } from 'typeorm';
 import { User } from './User';
 import { Product } from './Product';
+import { Order } from './Order';
 
 @Entity()
 export class OrderItem extends BaseEntity {
@@ -24,6 +26,10 @@ export class OrderItem extends BaseEntity {
 
   @Column({ type: 'decimal' })
   subtotal!: number;
+
+  @ManyToOne(() => Order, (order) => order.orderItem)
+  @JoinColumn({ name: 'order_id' })
+  order: Order;
 
   @ManyToOne(() => Product, (product) => product.order)
   product: Product;

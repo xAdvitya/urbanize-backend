@@ -6,10 +6,11 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
   ManyToOne,
-  BeforeInsert,
+  OneToMany,
 } from 'typeorm';
 import { User } from './User';
 import { Product } from './Product';
+import { OrderItem } from './OrderItem';
 
 @Entity()
 export class Order extends BaseEntity {
@@ -18,6 +19,9 @@ export class Order extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.order)
   creator: User;
+
+  @OneToMany(() => OrderItem, (orderitem) => orderitem.order)
+  orderItem: OrderItem[];
 
   @Column({ type: 'decimal' })
   price!: number;
