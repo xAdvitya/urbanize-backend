@@ -37,7 +37,7 @@ type Product {
 type Query {
   Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
-  products: [Product!]!
+  products(searchKeyword: String): [Product!]!
 }
 
 type Review {

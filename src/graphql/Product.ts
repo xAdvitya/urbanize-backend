@@ -10,6 +10,7 @@ import {
 import { Product } from '../entities/Product';
 import { context } from 'src/types/context';
 import { User } from '../entities/User';
+import { ILike } from 'typeorm';
 
 export const ProductType = objectType({
   name: 'Product',
@@ -69,6 +70,30 @@ export const createProductMutation = extendType({
           description,
           creatorId: userId,
         }).save();
+      },
+    });
+  },
+});
+
+export const searchQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.nonNull.field('products', {
+      type: 'Product',
+      args: {
+        searchKeyword: stringArg(),
+      },
+      resolve(_parent, args, _context, _info): Promise<Product[]> {
+        const { searchKeyword } = args;
+        if (searchKeyword) {
+          return Product.find({
+            where: [
+              { name: ILike(`%${searchKeyword}%`) },
+              { description: ILike(`%${searchKeyword}%`) },
+            ],
+          });
+        }
+        return Product.find();
       },
     });
   },

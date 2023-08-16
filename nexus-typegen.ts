@@ -220,6 +220,9 @@ export interface NexusGenArgTypes {
     Review: { // args
       productId: number; // Int!
     }
+    products: { // args
+      searchKeyword?: string | null; // String
+    }
   }
 }
 
