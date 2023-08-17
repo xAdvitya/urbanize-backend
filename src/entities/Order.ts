@@ -24,7 +24,10 @@ export class Order extends BaseEntity {
   orderItem: OrderItem[];
 
   @Column({ type: 'decimal' })
-  price!: number;
+  total!: number;
+
+  @Column()
+  address!: string;
 
   @CreateDateColumn()
   createdAt: Date;

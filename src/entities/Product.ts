@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  JoinColumn,
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
@@ -14,6 +15,7 @@ import { User } from './User';
 import { Wishlist } from './Wishlist';
 import { Review } from './Review';
 import { OrderItem } from './OrderItem';
+import { Brand } from './Brand';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -37,6 +39,10 @@ export class Product extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.products)
   creator: User;
+
+  @ManyToOne(() => Brand, (brand) => brand.brand)
+  @JoinColumn({ name: 'brand_id' })
+  brand: Brand;
 
   @OneToMany(() => Wishlist, (wishlist) => wishlist.product)
   wishlist: Wishlist[];
