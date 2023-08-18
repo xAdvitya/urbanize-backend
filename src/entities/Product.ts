@@ -16,6 +16,8 @@ import { Wishlist } from './Wishlist';
 import { Review } from './Review';
 import { OrderItem } from './OrderItem';
 import { Brand } from './Brand';
+import { Category } from './Category';
+import { ProductImage } from './ProductImage';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -44,6 +46,10 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'brand_id' })
   brand: Brand;
 
+  @ManyToOne(() => Category, (category) => category.category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
+
   @OneToMany(() => Wishlist, (wishlist) => wishlist.product)
   wishlist: Wishlist[];
 
@@ -52,6 +58,9 @@ export class Product extends BaseEntity {
 
   @OneToMany(() => OrderItem, (orderitem) => orderitem.product)
   order: OrderItem[];
+
+  @OneToMany(() => ProductImage, (image) => image.product)
+  images: ProductImage[];
 
   @CreateDateColumn()
   createdAt: Date;
