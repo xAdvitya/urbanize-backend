@@ -42,11 +42,11 @@ export class Product extends BaseEntity {
   @ManyToOne(() => User, (user) => user.products)
   creator: User;
 
-  @ManyToOne(() => Brand, (brand) => brand.brand)
+  @ManyToOne(() => Brand, (brand) => brand.products)
   @JoinColumn({ name: 'brand_id' })
   brand: Brand;
 
-  @ManyToOne(() => Category, (category) => category.category)
+  @ManyToOne(() => Category, (category) => category.products)
   @JoinColumn({ name: 'category_id' })
   category: Category;
 

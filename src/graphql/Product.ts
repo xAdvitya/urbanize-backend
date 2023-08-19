@@ -8,6 +8,8 @@ import {
   stringArg,
 } from 'nexus';
 import { Product } from '../entities/Product';
+import { Category } from '../entities/Category';
+import { Brand } from '../entities/Brand';
 import { context } from 'src/types/context';
 import { User } from '../entities/User';
 import { ILike } from 'typeorm';
@@ -15,18 +17,21 @@ import { ILike } from 'typeorm';
 export const ProductType = objectType({
   name: 'Product',
   definition(t) {
-    t.nonNull.int('id'),
-      t.nonNull.string('name'),
-      t.nonNull.string('description'),
-      t.nonNull.boolean('available'),
-      t.nonNull.float('price'),
-      t.nonNull.int('creatorId'),
-      t.field('createdBy', {
-        type: 'User',
-        resolve(parent, _args, _context: context, _info): Promise<User | null> {
-          return User.findOne({ where: { id: parent.creatorId } });
-        },
-      });
+    t.nonNull.int('id');
+    t.nonNull.string('name');
+    t.nonNull.string('description');
+    t.nonNull.boolean('available');
+    t.nonNull.float('price');
+    t.nonNull.int('creatory_id');
+    t.nonNull.int('categoryId');
+    t.nonNull.int('brand_id');
+
+    t.field('createdBy', {
+      type: 'User',
+      resolve(parent, _args, _context: context, _info): Promise<User | null> {
+        return User.findOne({ where: { id: parent.creatorId } });
+      },
+    });
   },
 });
 
@@ -36,7 +41,7 @@ export const productQuery = extendType({
     t.nonNull.list.nonNull.field('products', {
       type: 'Product',
       resolve(_parent, _args, _context: context, _info): Promise<Product[]> {
-        return Product.find();
+        return Product.find({ where: { id: 1 } });
         // const { conn } = context;
         // return conn.query('select * from Product');
       },

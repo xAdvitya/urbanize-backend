@@ -32,6 +32,10 @@ export interface NexusGenObjects {
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
+  Brand: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
   Mutation: {};
   OrderItem: { // root type
     id: number; // Int!
@@ -41,7 +45,9 @@ export interface NexusGenObjects {
   }
   Product: { // root type
     available: boolean; // Boolean!
-    creatorId: number; // Int!
+    brand_id: number; // Int!
+    categoryId: number; // Int!
+    creatory_id: number; // Int!
     description: string; // String!
     id: number; // Int!
     name: string; // String!
@@ -82,6 +88,10 @@ export interface NexusGenFieldTypes {
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
+  Brand: { // field return type
+    id: number; // Int!
+    name: string; // String!
+  }
   Mutation: { // field return type
     addReview: NexusGenRootTypes['Review']; // Review!
     addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
@@ -99,8 +109,10 @@ export interface NexusGenFieldTypes {
   }
   Product: { // field return type
     available: boolean; // Boolean!
+    brand_id: number; // Int!
+    categoryId: number; // Int!
     createdBy: NexusGenRootTypes['User'] | null; // User
-    creatorId: number; // Int!
+    creatory_id: number; // Int!
     description: string; // String!
     id: number; // Int!
     name: string; // String!
@@ -135,6 +147,10 @@ export interface NexusGenFieldTypeNames {
     token: 'String'
     user: 'User'
   }
+  Brand: { // field return type name
+    id: 'Int'
+    name: 'String'
+  }
   Mutation: { // field return type name
     addReview: 'Review'
     addToWishlist: 'Wishlist'
@@ -152,8 +168,10 @@ export interface NexusGenFieldTypeNames {
   }
   Product: { // field return type name
     available: 'Boolean'
+    brand_id: 'Int'
+    categoryId: 'Int'
     createdBy: 'User'
-    creatorId: 'Int'
+    creatory_id: 'Int'
     description: 'String'
     id: 'Int'
     name: 'String'

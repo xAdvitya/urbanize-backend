@@ -16,8 +16,16 @@ import { OrderItem } from './OrderItem';
 export class Category extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
-  @Column()
+
+  @Column({ unique: true })
   name!: string;
+
   @OneToMany(() => Product, (product) => product.category)
-  category: Category[];
+  products: Product[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

@@ -7,6 +7,11 @@ type AuthType {
   user: User!
 }
 
+type Brand {
+  id: Int!
+  name: String!
+}
+
 type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
   addToWishlist(productId: Int!): Wishlist!
@@ -26,8 +31,10 @@ type OrderItem {
 
 type Product {
   available: Boolean!
+  brand_id: Int!
+  categoryId: Int!
   createdBy: User
-  creatorId: Int!
+  creatory_id: Int!
   description: String!
   id: Int!
   name: String!
