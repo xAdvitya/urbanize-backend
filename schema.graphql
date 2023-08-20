@@ -15,7 +15,7 @@ type Brand {
 type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
   addToWishlist(productId: Int!): Wishlist!
-  createProduct(available: Boolean!, description: String!, name: String!, price: Float!): Product!
+  createProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, name: String!, price: Float!): Product!
   deleteReview(reviewId: Int!): Review!
   login(password: String!, username: String!): AuthType!
   register(email: String!, password: String!, username: String!): AuthType!
@@ -31,10 +31,10 @@ type OrderItem {
 
 type Product {
   available: Boolean!
-  brand_id: Int!
+  brandId: Int!
   categoryId: Int!
   createdBy: User
-  creatory_id: Int!
+  creatorId: Int!
   description: String!
   id: Int!
   name: String!

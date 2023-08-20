@@ -22,9 +22,9 @@ export const ProductType = objectType({
     t.nonNull.string('description');
     t.nonNull.boolean('available');
     t.nonNull.float('price');
-    t.nonNull.int('creatory_id');
+    t.nonNull.int('creatorId');
     t.nonNull.int('categoryId');
-    t.nonNull.int('brand_id');
+    t.nonNull.int('brandId');
 
     t.field('createdBy', {
       type: 'User',
@@ -59,9 +59,12 @@ export const createProductMutation = extendType({
         description: nonNull(stringArg()),
         available: nonNull(booleanArg()),
         price: nonNull(floatArg()),
+        categoryId: nonNull(intArg()),
+        brandId: nonNull(intArg()),
       },
       resolve(_parent, args, context, _info): Promise<Product> {
-        const { name, description, available, price } = args;
+        const { name, description, available, price, categoryId, brandId } =
+          args;
         const { userId } = context;
 
         if (!userId) {
@@ -74,6 +77,8 @@ export const createProductMutation = extendType({
           price,
           description,
           creatorId: userId,
+          categoryId,
+          brandId,
         }).save();
       },
     });

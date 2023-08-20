@@ -42,12 +42,14 @@ export class Product extends BaseEntity {
   @ManyToOne(() => User, (user) => user.products)
   creator: User;
 
+  @Column()
+  brandId!: number;
   @ManyToOne(() => Brand, (brand) => brand.products)
-  @JoinColumn({ name: 'brand_id' })
   brand: Brand;
 
+  @Column()
+  categoryId!: number;
   @ManyToOne(() => Category, (category) => category.products)
-  @JoinColumn({ name: 'category_id' })
   category: Category;
 
   @OneToMany(() => Wishlist, (wishlist) => wishlist.product)

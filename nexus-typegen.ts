@@ -45,9 +45,9 @@ export interface NexusGenObjects {
   }
   Product: { // root type
     available: boolean; // Boolean!
-    brand_id: number; // Int!
+    brandId: number; // Int!
     categoryId: number; // Int!
-    creatory_id: number; // Int!
+    creatorId: number; // Int!
     description: string; // String!
     id: number; // Int!
     name: string; // String!
@@ -109,10 +109,10 @@ export interface NexusGenFieldTypes {
   }
   Product: { // field return type
     available: boolean; // Boolean!
-    brand_id: number; // Int!
+    brandId: number; // Int!
     categoryId: number; // Int!
     createdBy: NexusGenRootTypes['User'] | null; // User
-    creatory_id: number; // Int!
+    creatorId: number; // Int!
     description: string; // String!
     id: number; // Int!
     name: string; // String!
@@ -168,10 +168,10 @@ export interface NexusGenFieldTypeNames {
   }
   Product: { // field return type name
     available: 'Boolean'
-    brand_id: 'Int'
+    brandId: 'Int'
     categoryId: 'Int'
     createdBy: 'User'
-    creatory_id: 'Int'
+    creatorId: 'Int'
     description: 'String'
     id: 'Int'
     name: 'String'
@@ -214,6 +214,8 @@ export interface NexusGenArgTypes {
     }
     createProduct: { // args
       available: boolean; // Boolean!
+      brandId: number; // Int!
+      categoryId: number; // Int!
       description: string; // String!
       name: string; // String!
       price: number; // Float!
