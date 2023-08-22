@@ -25,6 +25,7 @@ export const ProductType = objectType({
     t.nonNull.int('creatorId');
     t.nonNull.int('categoryId');
     t.nonNull.int('brandId');
+    t.nonNull.string('productImageId');
 
     t.field('createdBy', {
       type: 'User',

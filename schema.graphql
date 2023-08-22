@@ -39,6 +39,7 @@ type Product {
   id: Int!
   name: String!
   price: Float!
+  productImageId: String!
 }
 
 type Query {

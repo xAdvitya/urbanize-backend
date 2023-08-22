@@ -3,7 +3,7 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToOne,
+  OneToMany,
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
@@ -18,9 +18,8 @@ export class ProductImage extends BaseEntity {
   @Column()
   key!: string;
 
-  @ManyToOne(() => Product, (product) => product.images)
-  @JoinColumn({ name: 'product_id' })
-  product: Product;
+  @OneToMany(() => Product, (product) => product.creator)
+  product: Product[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -52,6 +52,11 @@ export class Product extends BaseEntity {
   @ManyToOne(() => Category, (category) => category.products)
   category: Category;
 
+  @Column({ nullable: true })
+  productImageId!: number;
+  @ManyToOne(() => ProductImage, (category) => category.product)
+  ProductImage: ProductImage;
+
   @OneToMany(() => Wishlist, (wishlist) => wishlist.product)
   wishlist: Wishlist[];
 
@@ -60,9 +65,6 @@ export class Product extends BaseEntity {
 
   @OneToMany(() => OrderItem, (orderitem) => orderitem.product)
   order: OrderItem[];
-
-  @OneToMany(() => ProductImage, (image) => image.product)
-  images: ProductImage[];
 
   @CreateDateColumn()
   createdAt: Date;

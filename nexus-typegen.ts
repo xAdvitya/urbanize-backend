@@ -52,6 +52,7 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
     price: number; // Float!
+    productImageId: string; // String!
   }
   Query: {};
   Review: { // root type
@@ -117,6 +118,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     price: number; // Float!
+    productImageId: string; // String!
   }
   Query: { // field return type
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
@@ -176,6 +178,7 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     price: 'Float'
+    productImageId: 'String'
   }
   Query: { // field return type name
     Review: 'Review'
