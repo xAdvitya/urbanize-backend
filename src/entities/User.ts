@@ -11,6 +11,7 @@ import { Product } from './Product';
 import { Wishlist } from './Wishlist';
 import { Review } from './Review';
 import { Order } from './Order';
+import { Cart } from './Cart';
 
 @Entity()
 export class User extends BaseEntity {
@@ -37,6 +38,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Order, (order) => order.creator)
   order: Order[];
+
+  @OneToMany(() => Cart, (cart) => cart.creator)
+  cart: Cart[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -37,9 +37,8 @@ Urbanize E-Commerce Backend is the backend server component of a modern e-commer
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (version X.X.X)
-- [npm](https://www.npmjs.com/) (version X.X.X)
-- [PostgreSQL](https://www.postgresql.org/) (version X.X.X)
+- [Node.js](https://nodejs.org/) (version 19.8.1)
+- [PostgreSQL](https://www.postgresql.org/) (version 15.4)
 
 ### Installation
 
@@ -48,3 +47,5 @@ Urbanize E-Commerce Backend is the backend server component of a modern e-commer
    ```bash
    git clone https://github.com/your-username/urbanize-backend.git
    ```
+
+2.

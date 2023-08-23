@@ -9,6 +9,7 @@ import { Brand } from './entities/Brand';
 import { OrderItem } from './entities/OrderItem';
 import { Category } from './entities/Category';
 import { ProductImage } from './entities/ProductImage';
+import { Cart } from './entities/Cart';
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ export default new DataSource({
     Brand,
     Category,
     ProductImage,
+    Cart,
   ],
   synchronize: true,
 });

@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
+  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,9 +18,8 @@ export class ProductImage extends BaseEntity {
 
   @Column()
   key!: string;
-
-  @OneToMany(() => Product, (product) => product.creator)
-  product: Product[];
+  @ManyToOne(() => Product, (product) => product.images)
+  product: Product;
 
   @CreateDateColumn()
   createdAt: Date;
