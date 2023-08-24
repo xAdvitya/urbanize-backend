@@ -18,6 +18,9 @@ export class ProductImage extends BaseEntity {
 
   @Column()
   key!: string;
+
+  @Column()
+  productId!: number;
   @ManyToOne(() => Product, (product) => product.images)
   product: Product;
 

@@ -34,7 +34,7 @@ export const ProductType = objectType({
         _context: context,
         _info
       ): Promise<ProductImage | null> {
-        return ProductImage.findOne({ where: { id: parent.creatorId } });
+        return ProductImage.findOne({ where: { id: parent.productId } });
       },
     });
 
