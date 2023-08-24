@@ -5,3 +5,4 @@ export * from './Wishlist';
 export * from './Review';
 export * from './OrderItem';
 export * from './Brand';
+export * from './ProductImage';

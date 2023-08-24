@@ -13,6 +13,7 @@ import { Brand } from '../entities/Brand';
 import { context } from 'src/types/context';
 import { User } from '../entities/User';
 import { ILike } from 'typeorm';
+import { ProductImage } from '../entities/ProductImage';
 
 export const ProductType = objectType({
   name: 'Product',
@@ -25,7 +26,17 @@ export const ProductType = objectType({
     t.nonNull.int('creatorId');
     t.nonNull.int('categoryId');
     t.nonNull.int('brandId');
-    t.nonNull.string('productImageId');
+    t.field('ImageDetail', {
+      type: 'ProductImage',
+      resolve(
+        parent,
+        _args,
+        _context: context,
+        _info
+      ): Promise<ProductImage | null> {
+        return ProductImage.findOne({ where: { id: parent.creatorId } });
+      },
+    });
 
     t.field('createdBy', {
       type: 'User',

@@ -52,7 +52,11 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
     price: number; // Float!
-    productImageId: string; // String!
+  }
+  ProductImage: { // root type
+    id: number; // Int!
+    key: string; // String!
+    productId: number; // Int!
   }
   Query: {};
   Review: { // root type
@@ -109,6 +113,7 @@ export interface NexusGenFieldTypes {
     unit_price: number; // Float!
   }
   Product: { // field return type
+    ImageDetail: NexusGenRootTypes['ProductImage'] | null; // ProductImage
     available: boolean; // Boolean!
     brandId: number; // Int!
     categoryId: number; // Int!
@@ -118,7 +123,11 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     price: number; // Float!
-    productImageId: string; // String!
+  }
+  ProductImage: { // field return type
+    id: number; // Int!
+    key: string; // String!
+    productId: number; // Int!
   }
   Query: { // field return type
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
@@ -169,6 +178,7 @@ export interface NexusGenFieldTypeNames {
     unit_price: 'Float'
   }
   Product: { // field return type name
+    ImageDetail: 'ProductImage'
     available: 'Boolean'
     brandId: 'Int'
     categoryId: 'Int'
@@ -178,7 +188,11 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     price: 'Float'
-    productImageId: 'String'
+  }
+  ProductImage: { // field return type name
+    id: 'Int'
+    key: 'String'
+    productId: 'Int'
   }
   Query: { // field return type name
     Review: 'Review'

@@ -30,6 +30,7 @@ type OrderItem {
 }
 
 type Product {
+  ImageDetail: ProductImage
   available: Boolean!
   brandId: Int!
   categoryId: Int!
@@ -39,7 +40,12 @@ type Product {
   id: Int!
   name: String!
   price: Float!
-  productImageId: String!
+}
+
+type ProductImage {
+  id: Int!
+  key: String!
+  productId: Int!
 }
 
 type Query {

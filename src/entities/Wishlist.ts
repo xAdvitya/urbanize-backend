@@ -18,11 +18,11 @@ export class Wishlist extends BaseEntity {
   id!: number;
 
   @ManyToOne(() => User, (user) => user.wishlist)
-  @JoinColumn({ name: 'creator_id' })
+  @JoinColumn({ name: 'creatorId' })
   creator: User;
 
   @ManyToOne(() => Product, (product) => product.wishlist)
-  @JoinColumn({ name: 'product_id' })
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @CreateDateColumn()
