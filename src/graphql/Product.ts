@@ -50,7 +50,7 @@ export const ProductType = objectType({
 export const productQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.nonNull.field('products', {
+    t.nonNull.list.nonNull.field('fetchProducts', {
       type: 'Product',
       resolve(_parent, _args, _context: context, _info): Promise<Product[]> {
         return Product.find({ where: { id: 1 } });

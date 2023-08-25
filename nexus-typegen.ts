@@ -68,8 +68,10 @@ export interface NexusGenObjects {
   }
   User: { // root type
     email: string; // String!
+    first_name: string; // String!
     id: number; // Int!
-    password: string; // String!
+    last_name: string; // String!
+    phone_number?: string | null; // String
     username: string; // String!
   }
   Wishlist: { // root type
@@ -132,7 +134,9 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
+    fetchProducts: NexusGenRootTypes['Product'][]; // [Product!]!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
+    userData: NexusGenRootTypes['User']; // User!
   }
   Review: { // field return type
     createdAt: string; // String!
@@ -143,8 +147,10 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string; // String!
+    first_name: string; // String!
     id: number; // Int!
-    password: string; // String!
+    last_name: string; // String!
+    phone_number: string | null; // String
     username: string; // String!
   }
   Wishlist: { // field return type
@@ -197,7 +203,9 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     Review: 'Review'
     Wishlist: 'Wishlist'
+    fetchProducts: 'Product'
     products: 'Product'
+    userData: 'User'
   }
   Review: { // field return type name
     createdAt: 'String'
@@ -208,8 +216,10 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     email: 'String'
+    first_name: 'String'
     id: 'Int'
-    password: 'String'
+    last_name: 'String'
+    phone_number: 'String'
     username: 'String'
   }
   Wishlist: { // field return type name
@@ -259,6 +269,9 @@ export interface NexusGenArgTypes {
     }
     products: { // args
       searchKeyword?: string | null; // String
+    }
+    userData: { // args
+      userId: number; // Int!
     }
   }
 }
