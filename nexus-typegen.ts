@@ -134,7 +134,9 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
-    fetchProducts: NexusGenRootTypes['Product'][]; // [Product!]!
+    fetchProduct: NexusGenRootTypes['Product'][]; // [Product!]!
+    fetchProductByBrand: NexusGenRootTypes['Product'][]; // [Product!]!
+    fetchProductByCategory: NexusGenRootTypes['Product'][]; // [Product!]!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
     userData: NexusGenRootTypes['User']; // User!
   }
@@ -203,7 +205,9 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     Review: 'Review'
     Wishlist: 'Wishlist'
-    fetchProducts: 'Product'
+    fetchProduct: 'Product'
+    fetchProductByBrand: 'Product'
+    fetchProductByCategory: 'Product'
     products: 'Product'
     userData: 'User'
   }
@@ -266,6 +270,15 @@ export interface NexusGenArgTypes {
   Query: {
     Review: { // args
       productId: number; // Int!
+    }
+    fetchProduct: { // args
+      productId: number; // Int!
+    }
+    fetchProductByBrand: { // args
+      brandId: number; // Int!
+    }
+    fetchProductByCategory: { // args
+      categoryId: number; // Int!
     }
     products: { // args
       searchKeyword?: string | null; // String

@@ -33,8 +33,8 @@ export const ProductType = objectType({
         _args,
         _context: context,
         _info
-      ): Promise<ProductImage | null> {
-        return ProductImage.findOne({ where: { id: parent.productId } });
+      ): Promise<ProductImage[] | null> {
+        return ProductImage.find({ where: { id: 1 } });
       },
     });
 
@@ -50,12 +50,48 @@ export const ProductType = objectType({
 export const productQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.nonNull.field('fetchProducts', {
+    t.nonNull.list.nonNull.field('fetchProduct', {
       type: 'Product',
-      resolve(_parent, _args, _context: context, _info): Promise<Product[]> {
-        return Product.find({ where: { id: 1 } });
+      args: {
+        productId: nonNull(intArg()),
+      },
+      resolve(_parent, args, _context: context, _info): Promise<Product[]> {
+        const { productId } = args;
+        return Product.find({ where: { id: productId } });
         // const { conn } = context;
         // return conn.query('select * from Product');
+      },
+    });
+  },
+});
+
+export const productBrandQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.nonNull.field('fetchProductByBrand', {
+      type: 'Product',
+      args: {
+        brandId: nonNull(intArg()),
+      },
+      resolve(_parent, args, _context: context, _info): Promise<Product[]> {
+        const { brandId } = args;
+        return Product.find({ where: { brandId: brandId } });
+      },
+    });
+  },
+});
+
+export const productCategoryQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.nonNull.field('fetchProductByCategory', {
+      type: 'Product',
+      args: {
+        categoryId: nonNull(intArg()),
+      },
+      resolve(_parent, args, _context: context, _info): Promise<Product[]> {
+        const { categoryId } = args;
+        return Product.find({ where: { categoryId: categoryId } });
       },
     });
   },

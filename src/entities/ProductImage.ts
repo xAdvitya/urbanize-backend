@@ -22,6 +22,7 @@ export class ProductImage extends BaseEntity {
   @Column()
   productId!: number;
   @ManyToOne(() => Product, (product) => product.images)
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @CreateDateColumn()

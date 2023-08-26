@@ -51,7 +51,9 @@ type ProductImage {
 type Query {
   Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
-  fetchProducts: [Product!]!
+  fetchProduct(productId: Int!): [Product!]!
+  fetchProductByBrand(brandId: Int!): [Product!]!
+  fetchProductByCategory(categoryId: Int!): [Product!]!
   products(searchKeyword: String): [Product!]!
   userData(userId: Int!): User!
 }
