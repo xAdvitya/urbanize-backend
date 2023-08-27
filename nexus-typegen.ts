@@ -36,6 +36,11 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
   }
+  Cart: { // root type
+    creatorId?: number | null; // Int
+    id?: number | null; // Int
+    productId?: number | null; // Int
+  }
   Mutation: {};
   OrderItem: { // root type
     id: number; // Int!
@@ -54,9 +59,9 @@ export interface NexusGenObjects {
     price: number; // Float!
   }
   ProductImage: { // root type
-    id: number; // Int!
-    key: string; // String!
-    productId: number; // Int!
+    id?: number | null; // Int
+    key?: string | null; // String
+    productId?: number | null; // Int
   }
   Query: {};
   Review: { // root type
@@ -99,6 +104,11 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
   }
+  Cart: { // field return type
+    creatorId: number | null; // Int
+    id: number | null; // Int
+    productId: number | null; // Int
+  }
   Mutation: { // field return type
     addReview: NexusGenRootTypes['Review']; // Review!
     addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
@@ -127,13 +137,14 @@ export interface NexusGenFieldTypes {
     price: number; // Float!
   }
   ProductImage: { // field return type
-    id: number; // Int!
-    key: string; // String!
-    productId: number; // Int!
+    id: number | null; // Int
+    key: string | null; // String
+    productId: number | null; // Int
   }
   Query: { // field return type
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
+    fetchCart: NexusGenRootTypes['Cart']; // Cart!
     fetchProduct: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByBrand: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByCategory: NexusGenRootTypes['Product'][]; // [Product!]!
@@ -170,6 +181,11 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
   }
+  Cart: { // field return type name
+    creatorId: 'Int'
+    id: 'Int'
+    productId: 'Int'
+  }
   Mutation: { // field return type name
     addReview: 'Review'
     addToWishlist: 'Wishlist'
@@ -205,6 +221,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     Review: 'Review'
     Wishlist: 'Wishlist'
+    fetchCart: 'Cart'
     fetchProduct: 'Product'
     fetchProductByBrand: 'Product'
     fetchProductByCategory: 'Product'

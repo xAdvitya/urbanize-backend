@@ -12,6 +12,12 @@ type Brand {
   name: String!
 }
 
+type Cart {
+  creatorId: Int
+  id: Int
+  productId: Int
+}
+
 type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
   addToWishlist(productId: Int!): Wishlist!
@@ -43,14 +49,15 @@ type Product {
 }
 
 type ProductImage {
-  id: Int!
-  key: String!
-  productId: Int!
+  id: Int
+  key: String
+  productId: Int
 }
 
 type Query {
   Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
+  fetchCart: Cart!
   fetchProduct(productId: Int!): [Product!]!
   fetchProductByBrand(brandId: Int!): [Product!]!
   fetchProductByCategory(categoryId: Int!): [Product!]!

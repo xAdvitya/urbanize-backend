@@ -17,12 +17,16 @@ export class Cart extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Column()
+  creatorId!: number;
   @ManyToOne(() => User, (user) => user.cart)
-  @JoinColumn({ name: 'creator_id' })
+  @JoinColumn({ name: 'creatorId' })
   creator: User;
 
+  @Column()
+  productId!: number;
   @ManyToOne(() => Product, (product) => product.cart)
-  @JoinColumn({ name: 'product_id' })
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @CreateDateColumn()

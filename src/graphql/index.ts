@@ -6,3 +6,4 @@ export * from './Review';
 export * from './OrderItem';
 export * from './Brand';
 export * from './ProductImage';
+export * from './Cart';

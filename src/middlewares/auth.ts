@@ -11,7 +11,7 @@ export const auth = (header: string): AuthTokenPayload => {
   }
 
   const res = jwt.verify(token, process.env.JWT_SECRET as jwt.Secret);
-  console.log(res);
+  // console.log(res);
   return jwt.verify(
     token,
     process.env.JWT_SECRET as jwt.Secret

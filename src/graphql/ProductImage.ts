@@ -4,9 +4,9 @@ export const ImageType = objectType({
   name: 'ProductImage',
   definition(t) {
     {
-      t.nonNull.int('id');
-      t.nonNull.string('key');
-      t.nonNull.int('productId');
+      t.int('id');
+      t.string('key');
+      t.int('productId');
     }
   },
 });
