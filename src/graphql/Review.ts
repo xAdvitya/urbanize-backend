@@ -24,12 +24,7 @@ export const ReviewQuery = extendType({
         productId: nonNull(intArg()),
       },
       resolve(_parent, args, context: context, _info): Promise<Review[]> {
-        const { userId } = context;
         const { productId } = args;
-        if (!userId) {
-          throw new Error("can't create product without logging in");
-        }
-
         return Review.find({
           where: { product: { id: productId } },
           relations: ['product'],
