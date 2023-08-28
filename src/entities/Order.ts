@@ -26,8 +26,8 @@ export class Order extends BaseEntity {
   @Column({ type: 'decimal' })
   total!: number;
 
-  @Column()
-  address!: string;
+  // @Column()
+  // address!: string;
 
   @CreateDateColumn()
   createdAt: Date;

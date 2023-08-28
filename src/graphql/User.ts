@@ -11,6 +11,7 @@ export const UserType = objectType({
       t.nonNull.string('last_name'),
       t.string('phone_number'),
       t.nonNull.string('email');
+    t.string('address');
   },
 });
 

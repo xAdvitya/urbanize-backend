@@ -72,6 +72,7 @@ export interface NexusGenObjects {
     title: string; // String!
   }
   User: { // root type
+    address?: string | null; // String
     email: string; // String!
     first_name: string; // String!
     id: number; // Int!
@@ -159,6 +160,7 @@ export interface NexusGenFieldTypes {
     title: string; // String!
   }
   User: { // field return type
+    address: string | null; // String
     email: string; // String!
     first_name: string; // String!
     id: number; // Int!
@@ -236,6 +238,7 @@ export interface NexusGenFieldTypeNames {
     title: 'String'
   }
   User: { // field return type name
+    address: 'String'
     email: 'String'
     first_name: 'String'
     id: 'Int'

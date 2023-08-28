@@ -30,8 +30,10 @@ export const ProductType = objectType({
     t.field('ImageDetail', {
       type: 'ProductImage',
       resolve(parent, _args, _context, _info): Promise<ProductImage[] | null> {
-        console.log('parent id', parent);
-        return ProductImage.find({ where: { productId: parent.id } });
+        return ProductImage.find({
+          where: { product: { id: parent.id } },
+          relations: ['product'],
+        });
       },
     });
 
