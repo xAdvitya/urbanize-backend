@@ -10,6 +10,14 @@ dotenv.config();
 const boot = async () => {
   const conn = await typeormConfig.initialize();
 
+  try {
+    await conn.query('SELECT 1');
+    console.log('🚀 Database connection established');
+  } catch (error) {
+    console.error('❌ Error connecting to the database:', error.message);
+    return;
+  }
+
   const server = new ApolloServer({
     schema,
     context: ({ req }) => {
@@ -30,7 +38,7 @@ const boot = async () => {
   });
 
   const { url } = await server.listen(process.env.PORT);
-  console.log(`Server ready at ${url}`);
+  console.log('🚀 Server ready at', url);
 };
 
 boot();
