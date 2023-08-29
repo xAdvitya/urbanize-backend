@@ -38,7 +38,7 @@ type OrderItem {
 }
 
 type Product {
-  ImageDetail: ProductImage
+  ImageDetail: [ProductImage!]!
   available: Boolean!
   brandId: Int!
   categoryId: Int!

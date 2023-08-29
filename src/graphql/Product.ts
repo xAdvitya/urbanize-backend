@@ -25,13 +25,10 @@ export const ProductType = objectType({
     t.nonNull.int('categoryId');
     t.nonNull.int('brandId');
 
-    t.field('ImageDetail', {
+    t.nonNull.list.nonNull.field('ImageDetail', {
       type: 'ProductImage',
       resolve(parent, _args, _context, _info): Promise<ProductImage[] | null> {
-        return ProductImage.find({
-          where: { product: { id: 1 } },
-          relations: ['product'],
-        });
+        return ProductImage.find({ where: { productId: parent.id } });
       },
     });
 
