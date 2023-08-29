@@ -2,37 +2,30 @@ import { ApolloServer } from 'apollo-server';
 import { schema } from './schema';
 import dotenv from 'dotenv';
 import typeormConfig from './typeorm.config';
-import { context } from './types/context';
-import { User } from './entities/User';
-import { Context } from 'nexus-plugin-prisma/dist/utils';
-import { auth } from './middlewares/auth';
+import { verifyToken } from './auth';
+import { CustomContext } from './types/context';
 
 dotenv.config();
 
 const boot = async () => {
   const conn = await typeormConfig.initialize();
 
-  // const result = await conn
-  //   .createQueryBuilder()
-  //   .insert()
-  //   .into(User)
-  //   .values({
-  //     username: 'Advitya',
-  //     email: 'advitya@gmail.com',
-  //     password: 'hashedPassword',
-  //   })
-  //   .returning('*')
-  //   .execute();
-
-  // console.log(result);
-
   const server = new ApolloServer({
     schema,
-    context: ({ req }): context => {
-      const token = req?.headers?.authorization
-        ? auth(req.headers.authorization)
-        : null;
-      return { conn, userId: token?.userId };
+    context: ({ req }) => {
+      const context: CustomContext = { req, conn };
+      const authorizationHeader = req.headers.authorization;
+
+      if (authorizationHeader) {
+        const token = authorizationHeader.split(' ')[1];
+        if (token) {
+          const payload = verifyToken(token);
+          context.userId = payload.userId;
+          context.role = payload.role;
+        }
+      }
+
+      return context;
     },
   });
 

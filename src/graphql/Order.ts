@@ -1,5 +1,5 @@
 import { Product } from '../entities/Product';
-import { context } from 'src/types/context';
+import { AuthPayload } from 'src/types/context';
 import { User } from '../entities/User';
 import { extendType, objectType } from 'nexus';
 

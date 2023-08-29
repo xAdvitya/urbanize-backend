@@ -1,5 +1,5 @@
 import { extendType, nonNull, objectType, stringArg } from 'nexus';
-import { context } from 'src/types/context';
+import { AuthPayload, CustomContext } from '../types/context'; // Update the import path
 import argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -26,19 +26,19 @@ export const AuthMutation = extendType({
         username: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      async resolve(_parent, args, _context: context, _info) {
+      async resolve(_parent, args, context: AuthPayload, _info) {
         const { username, password } = args;
         const user = await User.findOne({ where: { username } });
         if (!user) {
-          throw new Error('user not found');
+          throw new Error('User not found');
         }
         const isValid = await argon2.verify(user.password, password);
 
         if (!isValid) {
-          throw new Error('Invalid cred');
+          throw new Error('Invalid credentials');
         }
         const token = jwt.sign(
-          { userId: user.id },
+          { userId: user.id, role: user.role },
           process.env.JWT_SECRET as jwt.Secret
         );
 
@@ -52,7 +52,7 @@ export const AuthMutation = extendType({
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      async resolve(_parent, args, context: context, _info) {
+      async resolve(_parent, args, context: CustomContext, _info) {
         const { username, email, password } = args;
         const hashedPassword = await argon2.hash(password);
         let user;
@@ -68,7 +68,7 @@ export const AuthMutation = extendType({
 
           user = result.raw[0];
           token = jwt.sign(
-            { userId: user.id },
+            { userId: user.id, role: user.role },
             process.env.JWT_SECRET as jwt.Secret
           );
         } catch (err) {

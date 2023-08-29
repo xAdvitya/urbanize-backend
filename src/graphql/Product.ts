@@ -10,7 +10,7 @@ import {
 import { Product } from '../entities/Product';
 import { Category } from '../entities/Category';
 import { Brand } from '../entities/Brand';
-import { context } from 'src/types/context';
+import { AuthPayload } from 'src/types/context';
 import { User } from '../entities/User';
 import { ILike } from 'typeorm';
 import { ProductImage } from '../entities/ProductImage';
@@ -31,7 +31,7 @@ export const ProductType = objectType({
       type: 'ProductImage',
       resolve(parent, _args, _context, _info): Promise<ProductImage[] | null> {
         return ProductImage.find({
-          where: { product: { id: parent.id } },
+          where: { product: { id: 1 } },
           relations: ['product'],
         });
       },
@@ -39,7 +39,12 @@ export const ProductType = objectType({
 
     t.field('createdBy', {
       type: 'User',
-      resolve(parent, _args, _context: context, _info): Promise<User | null> {
+      resolve(
+        parent,
+        _args,
+        _context: AuthPayload,
+        _info
+      ): Promise<User | null> {
         return User.findOne({ where: { id: parent.creatorId } });
       },
     });
@@ -54,7 +59,7 @@ export const productQuery = extendType({
       args: {
         productId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: context, _info): Promise<Product[]> {
+      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
         const { productId } = args;
         return Product.find({ where: { id: productId } });
         // const { conn } = context;
@@ -72,7 +77,7 @@ export const productBrandQuery = extendType({
       args: {
         brandId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: context, _info): Promise<Product[]> {
+      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
         const { brandId } = args;
         return Product.find({ where: { brandId: brandId } });
       },
@@ -88,7 +93,7 @@ export const productCategoryQuery = extendType({
       args: {
         categoryId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: context, _info): Promise<Product[]> {
+      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
         const { categoryId } = args;
         return Product.find({ where: { categoryId: categoryId } });
       },

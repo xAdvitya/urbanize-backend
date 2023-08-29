@@ -39,6 +39,9 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   address: string;
 
+  @Column()
+  role: string;
+
   @OneToMany(() => Product, (product) => product.creator)
   products: Product[];
 

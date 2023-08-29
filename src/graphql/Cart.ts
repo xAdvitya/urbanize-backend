@@ -10,7 +10,7 @@ import {
 import { Product } from '../entities/Product';
 import { Category } from '../entities/Category';
 import { Brand } from '../entities/Brand';
-import { context } from 'src/types/context';
+import { AuthPayload } from 'src/types/context';
 import { User } from '../entities/User';
 import { ILike } from 'typeorm';
 import { ProductImage } from '../entities/ProductImage';
@@ -31,7 +31,7 @@ export const cartQuery = extendType({
   definition(t) {
     t.nonNull.field('fetchCart', {
       type: 'Cart',
-      resolve(_parent, args, context: context, _info): Promise<Cart[]> {
+      resolve(_parent, args, context: AuthPayload, _info): Promise<Cart[]> {
         const { userId } = context;
 
         if (!userId) {

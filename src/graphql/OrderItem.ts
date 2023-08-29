@@ -8,7 +8,6 @@ import {
   stringArg,
 } from 'nexus';
 import { Product } from '../entities/Product';
-import { context } from 'src/types/context';
 import { User } from '../entities/User';
 
 export const OrderitemType = objectType({

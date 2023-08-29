@@ -1,6 +1,6 @@
 import { extendType, intArg, nonNull, objectType, stringArg } from 'nexus';
 import { Product } from '../entities/Product';
-import { context } from 'src/types/context';
+import { AuthPayload } from 'src/types/context';
 import { Review } from '../entities/Review';
 import { Wishlist } from 'src/entities/Wishlist';
 
@@ -23,7 +23,7 @@ export const ReviewQuery = extendType({
       args: {
         productId: nonNull(intArg()),
       },
-      resolve(_parent, args, context: context, _info): Promise<Review[]> {
+      resolve(_parent, args, context: AuthPayload, _info): Promise<Review[]> {
         const { productId } = args;
         return Review.find({
           where: { product: { id: productId } },
@@ -74,7 +74,11 @@ export const deleteReviewMutation = extendType({
       args: {
         reviewId: nonNull(intArg()),
       },
-      async resolve(_parent, args, context: context): Promise<Review | null> {
+      async resolve(
+        _parent,
+        args,
+        context: AuthPayload
+      ): Promise<Review | null> {
         const { reviewId } = args;
         const { userId } = context;
 

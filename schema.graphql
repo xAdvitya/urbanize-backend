@@ -80,7 +80,13 @@ type User {
   id: Int!
   last_name: String!
   phone_number: String
+  role: UserRole!
   username: String!
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }
 
 type Wishlist {

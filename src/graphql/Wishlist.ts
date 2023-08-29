@@ -8,7 +8,7 @@ import {
   stringArg,
 } from 'nexus';
 import { Product } from '../entities/Product';
-import { context } from 'src/types/context';
+import { AuthPayload, CustomContext } from '../types/context';
 import { User } from '../entities/User';
 import { Wishlist } from '../entities/Wishlist';
 
@@ -25,7 +25,12 @@ export const WishlistQuery = extendType({
   definition(t) {
     t.nonNull.list.nonNull.field('Wishlist', {
       type: 'Wishlist',
-      resolve(_parent, _args, context: context, _info): Promise<Wishlist[]> {
+      resolve(
+        _parent,
+        _args,
+        context: AuthPayload,
+        _info
+      ): Promise<Wishlist[]> {
         const { userId } = context;
         if (!userId) {
           throw new Error("can't create product without logging in");
@@ -99,7 +104,7 @@ export const removeFromWishlist = extendType({
 
 async function deleteProductFromWishlist(
   userId: number,
-  
+
   productId: number
 ): Promise<boolean> {
   try {

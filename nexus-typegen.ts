@@ -17,6 +17,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  UserRole: "ADMIN" | "USER"
 }
 
 export interface NexusGenScalars {
@@ -78,6 +79,7 @@ export interface NexusGenObjects {
     id: number; // Int!
     last_name: string; // String!
     phone_number?: string | null; // String
+    role: NexusGenEnums['UserRole']; // UserRole!
     username: string; // String!
   }
   Wishlist: { // root type
@@ -94,7 +96,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   AuthType: { // field return type
@@ -166,6 +168,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     last_name: string; // String!
     phone_number: string | null; // String
+    role: NexusGenEnums['UserRole']; // UserRole!
     username: string; // String!
   }
   Wishlist: { // field return type
@@ -244,6 +247,7 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     last_name: 'String'
     phone_number: 'String'
+    role: 'UserRole'
     username: 'String'
   }
   Wishlist: { // field return type name
@@ -319,7 +323,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

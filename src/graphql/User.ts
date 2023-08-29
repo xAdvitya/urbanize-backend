@@ -1,6 +1,12 @@
 import { extendType, intArg, nonNull, objectType } from 'nexus';
 import { User } from '../entities/User';
-import { context } from 'src/types/context';
+import { AuthPayload } from 'src/types/context';
+import { enumType } from 'nexus';
+
+export const UserRole = enumType({
+  name: 'UserRole',
+  members: ['USER', 'ADMIN'],
+});
 
 export const UserType = objectType({
   name: 'User',
@@ -12,6 +18,7 @@ export const UserType = objectType({
       t.string('phone_number'),
       t.nonNull.string('email');
     t.string('address');
+    t.nonNull.field('role', { type: 'UserRole' });
   },
 });
 
@@ -23,7 +30,7 @@ export const userQuery = extendType({
       args: {
         userId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: context, _info): Promise<User> {
+      resolve(_parent, args, _context: AuthPayload, _info): Promise<User> {
         const { userId } = args;
         return User.findOne({ where: { id: userId } });
       },
