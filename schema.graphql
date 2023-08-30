@@ -20,6 +20,7 @@ type Cart {
 
 type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
+  addToCart(creatorId: Int!, productId: Int!): Cart!
   addToWishlist(productId: Int!): Wishlist!
   createProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, name: String!, price: Float!): Product!
   deleteReview(reviewId: Int!): Review!

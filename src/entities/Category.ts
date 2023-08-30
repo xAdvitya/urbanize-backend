@@ -5,12 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { User } from './User';
 import { Product } from './Product';
-import { OrderItem } from './OrderItem';
 
 @Entity()
 export class Category extends BaseEntity {

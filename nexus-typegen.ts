@@ -114,6 +114,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addReview: NexusGenRootTypes['Review']; // Review!
+    addToCart: NexusGenRootTypes['Cart']; // Cart!
     addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
     createProduct: NexusGenRootTypes['Product']; // Product!
     deleteReview: NexusGenRootTypes['Review']; // Review!
@@ -193,6 +194,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     addReview: 'Review'
+    addToCart: 'Cart'
     addToWishlist: 'Wishlist'
     createProduct: 'Product'
     deleteReview: 'Review'
@@ -263,6 +265,10 @@ export interface NexusGenArgTypes {
       rating: number; // Int!
       review_text: string; // String!
       title: string; // String!
+    }
+    addToCart: { // args
+      creatorId: number; // Int!
+      productId: number; // Int!
     }
     addToWishlist: { // args
       productId: number; // Int!

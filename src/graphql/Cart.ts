@@ -1,20 +1,5 @@
-import {
-  booleanArg,
-  extendType,
-  floatArg,
-  intArg,
-  nonNull,
-  objectType,
-  stringArg,
-} from 'nexus';
-import { Product } from '../entities/Product';
-import { Category } from '../entities/Category';
-import { Brand } from '../entities/Brand';
+import { extendType, intArg, nonNull, objectType } from 'nexus';
 import { AuthPayload } from 'src/types/context';
-import { User } from '../entities/User';
-import { ILike } from 'typeorm';
-import { ProductImage } from '../entities/ProductImage';
-import { resolve } from 'path';
 import { Cart } from '../entities/Cart';
 
 export const CartType = objectType({
@@ -38,6 +23,32 @@ export const cartQuery = extendType({
           throw new Error("can't create product without logging in");
         }
         return Cart.find({ where: { creatorId: userId } });
+      },
+    });
+  },
+});
+
+export const addToCartMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('addToCart', {
+      type: 'Cart',
+      args: {
+        productId: nonNull(intArg()),
+        creatorId: nonNull(intArg()),
+      },
+      resolve(_parent, args, context: AuthPayload, _info): Promise<Cart> {
+        const { productId, creatorId } = args;
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error("can't add to cart without logging in");
+        }
+
+        return Cart.create({
+          productId,
+          creatorId,
+        }).save();
       },
     });
   },
