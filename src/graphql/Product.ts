@@ -8,8 +8,6 @@ import {
   stringArg,
 } from 'nexus';
 import { Product } from '../entities/Product';
-import { Category } from '../entities/Category';
-import { Brand } from '../entities/Brand';
 import { AuthPayload } from 'src/types/context';
 import { User } from '../entities/User';
 import { ILike } from 'typeorm';

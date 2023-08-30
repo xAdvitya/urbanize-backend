@@ -1,8 +1,6 @@
 import { extendType, intArg, nonNull, objectType, stringArg } from 'nexus';
-import { Product } from '../entities/Product';
 import { AuthPayload } from 'src/types/context';
 import { Review } from '../entities/Review';
-import { Wishlist } from 'src/entities/Wishlist';
 
 export const ReviewType = objectType({
   name: 'Review',
