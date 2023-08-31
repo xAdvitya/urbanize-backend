@@ -2,6 +2,8 @@ import { extendType, intArg, nonNull, objectType } from 'nexus';
 import { AuthPayload } from 'src/types/context';
 import { Cart } from '../entities/Cart';
 import { Product } from '../entities/Product';
+import { Order } from '../entities/Order';
+import { OrderItem } from '../entities/OrderItem';
 
 export const CartType = objectType({
   name: 'Cart',
@@ -85,6 +87,68 @@ export const removeFromCartMutation = extendType({
 
         await cartItem.remove();
         return cartItem;
+      },
+    });
+  },
+});
+
+const BuyCartResponse = objectType({
+  name: 'BuyCartResponse',
+  definition(t) {
+    t.boolean('success');
+    t.string('message');
+  },
+});
+
+export const buyCartMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.field('buyCart', {
+      type: BuyCartResponse,
+      resolve: async (_parent, _args, context: AuthPayload, _info) => {
+        const { userId } = context;
+
+        if (!userId) {
+          throw new Error("Can't buy cart without logging in");
+        }
+
+        const cartItems = await Cart.find({ where: { creatorId: userId } });
+
+        if (cartItems.length === 0) {
+          throw new Error('Cart is empty.');
+        }
+
+        const order = new Order();
+        order.creatorId = userId;
+
+        order.status = 'Processing';
+        order.createdAt = new Date();
+
+        const orderItems: OrderItem[] = [];
+
+        for (const cartItem of cartItems) {
+          const orderItem = new OrderItem();
+          orderItem.product = cartItem.product;
+          orderItem.quantity = 1;
+          orderItems.push(orderItem);
+        }
+
+        order.orderItem = orderItems;
+
+        const totalAmount = orderItems.reduce(
+          (total, item) => total + item.subtotal,
+          0
+        );
+        order.total = totalAmount;
+
+        await order.save();
+
+        await Cart.remove(cartItems);
+
+        return {
+          success: true,
+          message: 'Cart purchased successfully.',
+        };
       },
     });
   },

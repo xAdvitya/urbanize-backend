@@ -37,6 +37,10 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
   }
+  BuyCartResponse: { // root type
+    message?: string | null; // String
+    success?: boolean | null; // Boolean
+  }
   Cart: { // root type
     creatorId?: number | null; // Int
     id?: number | null; // Int
@@ -107,6 +111,10 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
   }
+  BuyCartResponse: { // field return type
+    message: string | null; // String
+    success: boolean | null; // Boolean
+  }
   Cart: { // field return type
     creatorId: number | null; // Int
     id: number | null; // Int
@@ -116,6 +124,7 @@ export interface NexusGenFieldTypes {
     addReview: NexusGenRootTypes['Review']; // Review!
     addToCart: NexusGenRootTypes['Cart']; // Cart!
     addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
+    buyCart: NexusGenRootTypes['BuyCartResponse'] | null; // BuyCartResponse
     createProduct: NexusGenRootTypes['Product']; // Product!
     deleteReview: NexusGenRootTypes['Review']; // Review!
     login: NexusGenRootTypes['AuthType']; // AuthType!
@@ -188,6 +197,10 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
   }
+  BuyCartResponse: { // field return type name
+    message: 'String'
+    success: 'Boolean'
+  }
   Cart: { // field return type name
     creatorId: 'Int'
     id: 'Int'
@@ -197,6 +210,7 @@ export interface NexusGenFieldTypeNames {
     addReview: 'Review'
     addToCart: 'Cart'
     addToWishlist: 'Wishlist'
+    buyCart: 'BuyCartResponse'
     createProduct: 'Product'
     deleteReview: 'Review'
     login: 'AuthType'

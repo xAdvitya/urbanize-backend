@@ -23,14 +23,15 @@ export class OrderItem extends BaseEntity {
   @Column({ type: 'decimal' })
   unit_price!: number;
 
-  @Column({ type: 'decimal' })
+  @Column({ type: 'decimal', nullable: true })
   subtotal!: number;
 
   @ManyToOne(() => Order, (order) => order.orderItem)
-  @JoinColumn({ name: 'order_id' })
+  @JoinColumn({ name: 'orderId' })
   order: Order;
 
   @ManyToOne(() => Product, (product) => product.order)
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @CreateDateColumn()
@@ -39,20 +40,20 @@ export class OrderItem extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @BeforeInsert()
-  async setProductPrice() {
-    if (this.product) {
-      const fetchedProduct = await Product.findOne({
-        where: { id: this.product.id },
-      });
-      if (fetchedProduct) {
-        const productPrice = fetchedProduct.price;
-        this.unit_price = productPrice;
-      }
-    }
-  }
-  @BeforeInsert()
-  async setSubtotal() {
-    this.subtotal = this.unit_price * this.quantity;
-  }
+  //   @BeforeInsert()
+  //   async setProductPrice() {
+  //     if (this.product) {
+  //       const fetchedProduct = await Product.findOne({
+  //         where: { id: this.product.id },
+  //       });
+  //       if (fetchedProduct) {
+  //         const productPrice = fetchedProduct.price;
+  //         this.unit_price = productPrice;
+  //       }
+  //     }
+  //   }
+  //   @BeforeInsert()
+  //   async setSubtotal() {
+  //     this.subtotal = this.unit_price * this.quantity;
+  //   }
 }

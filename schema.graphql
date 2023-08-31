@@ -12,6 +12,11 @@ type Brand {
   name: String!
 }
 
+type BuyCartResponse {
+  message: String
+  success: Boolean
+}
+
 type Cart {
   creatorId: Int
   id: Int
@@ -22,6 +27,7 @@ type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
   addToCart(creatorId: Int!, productId: Int!): Cart!
   addToWishlist(productId: Int!): Wishlist!
+  buyCart: BuyCartResponse
   createProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, name: String!, price: Float!): Product!
   deleteReview(reviewId: Int!): Review!
   login(password: String!, username: String!): AuthType!
