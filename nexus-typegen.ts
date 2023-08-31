@@ -120,6 +120,7 @@ export interface NexusGenFieldTypes {
     deleteReview: NexusGenRootTypes['Review']; // Review!
     login: NexusGenRootTypes['AuthType']; // AuthType!
     register: NexusGenRootTypes['AuthType']; // AuthType!
+    removeFromCart: NexusGenRootTypes['Cart']; // Cart!
     removeFromWishlist: boolean; // Boolean!
   }
   OrderItem: { // field return type
@@ -148,7 +149,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
-    fetchCart: NexusGenRootTypes['Cart']; // Cart!
+    fetchCart: Array<NexusGenRootTypes['Cart'] | null>; // [Cart]!
     fetchProduct: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByBrand: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByCategory: NexusGenRootTypes['Product'][]; // [Product!]!
@@ -200,6 +201,7 @@ export interface NexusGenFieldTypeNames {
     deleteReview: 'Review'
     login: 'AuthType'
     register: 'AuthType'
+    removeFromCart: 'Cart'
     removeFromWishlist: 'Boolean'
   }
   OrderItem: { // field return type name
@@ -292,6 +294,9 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
       username: string; // String!
+    }
+    removeFromCart: { // args
+      productId: number; // Int!
     }
     removeFromWishlist: { // args
       productId: number; // Int!

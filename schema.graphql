@@ -26,6 +26,7 @@ type Mutation {
   deleteReview(reviewId: Int!): Review!
   login(password: String!, username: String!): AuthType!
   register(email: String!, password: String!, username: String!): AuthType!
+  removeFromCart(productId: Int!): Cart!
   removeFromWishlist(productId: Int!): Boolean!
 }
 
@@ -58,7 +59,7 @@ type ProductImage {
 type Query {
   Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
-  fetchCart: Cart!
+  fetchCart: [Cart]!
   fetchProduct(productId: Int!): [Product!]!
   fetchProductByBrand(brandId: Int!): [Product!]!
   fetchProductByCategory(categoryId: Int!): [Product!]!

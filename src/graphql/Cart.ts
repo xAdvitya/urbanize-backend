@@ -1,6 +1,7 @@
 import { extendType, intArg, nonNull, objectType } from 'nexus';
 import { AuthPayload } from 'src/types/context';
 import { Cart } from '../entities/Cart';
+import { Product } from '../entities/Product';
 
 export const CartType = objectType({
   name: 'Cart',
@@ -14,7 +15,7 @@ export const CartType = objectType({
 export const cartQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.field('fetchCart', {
+    t.nonNull.list.field('fetchCart', {
       type: 'Cart',
       resolve(_parent, args, context: AuthPayload, _info): Promise<Cart[]> {
         const { userId } = context;
@@ -49,6 +50,41 @@ export const addToCartMutation = extendType({
           productId,
           creatorId,
         }).save();
+      },
+    });
+  },
+});
+
+export const removeFromCartMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('removeFromCart', {
+      type: 'Cart',
+      args: {
+        productId: nonNull(intArg()),
+      },
+      async resolve(
+        _parent,
+        args,
+        context: AuthPayload,
+        _info
+      ): Promise<Cart | null> {
+        const { productId } = args;
+        const { userId } = context;
+        if (!userId) {
+          throw new Error(
+            "Can't remove product from wishlist without logging in"
+          );
+        }
+
+        const cartItem = await Cart.findOne({
+          where: {
+            productId: productId,
+          },
+        });
+
+        await cartItem.remove();
+        return cartItem;
       },
     });
   },
