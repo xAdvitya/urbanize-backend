@@ -20,7 +20,7 @@ export class OrderItem extends BaseEntity {
   @Column()
   quantity!: number;
 
-  @Column({ type: 'decimal' })
+  @Column({ type: 'decimal', default: 0 })
   unit_price!: number;
 
   @Column({ type: 'decimal', nullable: true })
@@ -40,20 +40,23 @@ export class OrderItem extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  //   @BeforeInsert()
-  //   async setProductPrice() {
-  //     if (this.product) {
-  //       const fetchedProduct = await Product.findOne({
-  //         where: { id: this.product.id },
-  //       });
-  //       if (fetchedProduct) {
-  //         const productPrice = fetchedProduct.price;
-  //         this.unit_price = productPrice;
-  //       }
-  //     }
-  //   }
-  //   @BeforeInsert()
-  //   async setSubtotal() {
-  //     this.subtotal = this.unit_price * this.quantity;
-  //   }
+  @BeforeInsert()
+  async setProductPrice() {
+    if (this.product) {
+      const fetchedProduct = await Product.findOne({
+        where: { id: this.product.id },
+      });
+      if (fetchedProduct) {
+        const productPrice = fetchedProduct.price;
+        this.unit_price = productPrice;
+        console.log(`Setting unit_price to: ${this.unit_price}`);
+      }
+    }
+  }
+
+  @BeforeInsert()
+  async setSubtotal() {
+    this.subtotal = this.unit_price * this.quantity;
+    console.log(`Setting subtotal to: ${this.subtotal}`);
+  }
 }
