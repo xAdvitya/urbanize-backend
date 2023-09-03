@@ -112,8 +112,6 @@ export const buyCartMutation = extendType({
           throw new Error("Can't buy cart without logging in");
         }
 
-        console.log('userId:', userId);
-
         const cartItems = await Cart.find({ where: { creatorId: userId } });
 
         if (cartItems.length === 0) {
@@ -123,16 +121,18 @@ export const buyCartMutation = extendType({
         const order = new Order();
         order.creatorId = userId;
 
-        console.log('order.creatorId:', order.creatorId);
-
         order.status = 'Processing';
         order.createdAt = new Date();
 
         const orderItems: OrderItem[] = [];
 
         for (const cartItem of cartItems) {
+          const product = await Product.findOne({
+            where: { id: cartItem.productId },
+          });
+
           const orderItem = new OrderItem();
-          orderItem.product = cartItem.product;
+          orderItem.productId = cartItem.productId;
           orderItem.quantity = 1;
           orderItems.push(orderItem);
           await orderItem.save();
@@ -141,12 +141,13 @@ export const buyCartMutation = extendType({
         order.orderItem = orderItems;
 
         const totalAmount = orderItems.reduce(
-          (total, item) => total + item.subtotal,
+          (total, item) => total + item.unit_price * item.quantity,
           0
         );
-        order.total = totalAmount;
 
-        console.log('order:', order);
+        order.creatorId = userId;
+
+        order.total = totalAmount;
 
         await order.save();
 

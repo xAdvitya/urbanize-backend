@@ -26,10 +26,14 @@ export class OrderItem extends BaseEntity {
   @Column({ type: 'decimal', nullable: true })
   subtotal!: number;
 
+  @Column({ nullable: true })
+  orderId!: number;
   @ManyToOne(() => Order, (order) => order.orderItem)
   @JoinColumn({ name: 'orderId' })
   order: Order;
 
+  @Column({ nullable: true })
+  productId!: number;
   @ManyToOne(() => Product, (product) => product.order)
   @JoinColumn({ name: 'productId' })
   product: Product;
@@ -45,6 +49,7 @@ export class OrderItem extends BaseEntity {
     if (this.product) {
       const fetchedProduct = await Product.findOne({
         where: { id: this.product.id },
+        relations: ['product'],
       });
       if (fetchedProduct) {
         const productPrice = fetchedProduct.price;
