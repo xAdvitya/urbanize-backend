@@ -66,7 +66,7 @@ type Query {
   Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
   fetchCart: [Cart]!
-  fetchProduct(productId: Int!): [Product!]!
+  fetchProduct(productId: Int): [Product!]!
   fetchProductByBrand(brandId: Int!): [Product!]!
   fetchProductByCategory(categoryId: Int!): [Product!]!
   products(searchKeyword: String): [Product!]!

@@ -52,10 +52,14 @@ export const productQuery = extendType({
     t.nonNull.list.nonNull.field('fetchProduct', {
       type: 'Product',
       args: {
-        productId: nonNull(intArg()),
+        productId: intArg(),
       },
       resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
         const { productId } = args;
+
+        if (productId === null) {
+          return Product.find();
+        }
         return Product.find({ where: { id: productId } });
         // const { conn } = context;
         // return conn.query('select * from Product');

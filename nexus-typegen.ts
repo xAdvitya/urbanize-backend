@@ -321,7 +321,7 @@ export interface NexusGenArgTypes {
       productId: number; // Int!
     }
     fetchProduct: { // args
-      productId: number; // Int!
+      productId?: number | null; // Int
     }
     fetchProductByBrand: { // args
       brandId: number; // Int!
