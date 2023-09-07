@@ -13,8 +13,8 @@ export const UserType = objectType({
   definition(t) {
     t.nonNull.int('id'),
       t.nonNull.string('username'),
-      t.nonNull.string('first_name'),
-      t.nonNull.string('last_name'),
+      t.string('first_name'),
+      t.string('last_name'),
       t.string('phone_number'),
       t.nonNull.string('email');
     t.string('address');

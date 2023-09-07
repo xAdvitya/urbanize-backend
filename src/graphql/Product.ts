@@ -68,38 +68,6 @@ export const productQuery = extendType({
   },
 });
 
-export const productBrandQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.nonNull.field('fetchProductByBrand', {
-      type: 'Product',
-      args: {
-        brandId: nonNull(intArg()),
-      },
-      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
-        const { brandId } = args;
-        return Product.find({ where: { brandId: brandId } });
-      },
-    });
-  },
-});
-
-export const productCategoryQuery = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.list.nonNull.field('fetchProductByCategory', {
-      type: 'Product',
-      args: {
-        categoryId: nonNull(intArg()),
-      },
-      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
-        const { categoryId } = args;
-        return Product.find({ where: { categoryId: categoryId } });
-      },
-    });
-  },
-});
-
 export const createProductMutation = extendType({
   type: 'Mutation',
   definition(t) {
@@ -113,7 +81,7 @@ export const createProductMutation = extendType({
         categoryId: nonNull(intArg()),
         brandId: nonNull(intArg()),
       },
-      resolve(_parent, args, context, _info): Promise<Product> {
+      resolve(_parent, args, context: AuthPayload, _info): Promise<Product> {
         const { name, description, available, price, categoryId, brandId } =
           args;
         const { userId } = context;

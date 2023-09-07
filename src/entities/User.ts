@@ -21,10 +21,10 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   username!: string;
 
-  @Column()
+  @Column({ nullable: true })
   first_name!: string;
 
-  @Column()
+  @Column({ nullable: true })
   last_name!: string;
 
   @Column()
@@ -39,7 +39,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   role: string;
 
   @OneToMany(() => Product, (product) => product.creator)

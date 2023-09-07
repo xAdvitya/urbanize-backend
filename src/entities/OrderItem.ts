@@ -61,7 +61,8 @@ export class OrderItem extends BaseEntity {
 
   @BeforeInsert()
   async setSubtotal() {
-    this.subtotal = this.unit_price * this.quantity;
+    // this.subtotal = this.unit_price * this.quantity;
+    this.subtotal = 0;
     console.log(`Setting subtotal to: ${this.subtotal}`);
   }
 }

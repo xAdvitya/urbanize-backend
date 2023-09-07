@@ -23,11 +23,17 @@ type Cart {
   productId: Int
 }
 
+type Category {
+  id: Int!
+  name: String!
+}
+
 type Mutation {
   addReview(productId: Int!, rating: Int!, review_text: String!, title: String!): Review!
   addToCart(creatorId: Int!, productId: Int!): Cart!
   addToWishlist(productId: Int!): Wishlist!
   buyCart: BuyCartResponse
+  createBrand(name: String!): Brand!
   createProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, name: String!, price: Float!): Product!
   deleteReview(reviewId: Int!): Review!
   login(password: String!, username: String!): AuthType!
@@ -36,11 +42,17 @@ type Mutation {
   removeFromWishlist(productId: Int!): Boolean!
 }
 
-type OrderItem {
+type Order {
   id: Int!
-  quantity: Int!
-  subtotal: Float!
-  unit_price: Float!
+  status: String!
+}
+
+type OrderItem {
+  id: Int
+  productId: Int
+  quantity: Int
+  subtotal: Float
+  unit_price: Float
 }
 
 type Product {
@@ -66,9 +78,11 @@ type Query {
   Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
   fetchCart: [Cart]!
+  fetchOrderItems: [[OrderItem]]
   fetchProduct(productId: Int): [Product!]!
   fetchProductByBrand(brandId: Int!): [Product!]!
   fetchProductByCategory(categoryId: Int!): [Product!]!
+  orderData: [Order]!
   products(searchKeyword: String): [Product!]!
   userData(userId: Int!): User!
 }
@@ -84,9 +98,9 @@ type Review {
 type User {
   address: String
   email: String!
-  first_name: String!
+  first_name: String
   id: Int!
-  last_name: String!
+  last_name: String
   phone_number: String
   role: UserRole!
   username: String!

@@ -46,12 +46,21 @@ export interface NexusGenObjects {
     id?: number | null; // Int
     productId?: number | null; // Int
   }
-  Mutation: {};
-  OrderItem: { // root type
+  Category: { // root type
     id: number; // Int!
-    quantity: number; // Int!
-    subtotal: number; // Float!
-    unit_price: number; // Float!
+    name: string; // String!
+  }
+  Mutation: {};
+  Order: { // root type
+    id: number; // Int!
+    status: string; // String!
+  }
+  OrderItem: { // root type
+    id?: number | null; // Int
+    productId?: number | null; // Int
+    quantity?: number | null; // Int
+    subtotal?: number | null; // Float
+    unit_price?: number | null; // Float
   }
   Product: { // root type
     available: boolean; // Boolean!
@@ -79,9 +88,9 @@ export interface NexusGenObjects {
   User: { // root type
     address?: string | null; // String
     email: string; // String!
-    first_name: string; // String!
+    first_name?: string | null; // String
     id: number; // Int!
-    last_name: string; // String!
+    last_name?: string | null; // String
     phone_number?: string | null; // String
     role: NexusGenEnums['UserRole']; // UserRole!
     username: string; // String!
@@ -120,11 +129,16 @@ export interface NexusGenFieldTypes {
     id: number | null; // Int
     productId: number | null; // Int
   }
+  Category: { // field return type
+    id: number; // Int!
+    name: string; // String!
+  }
   Mutation: { // field return type
     addReview: NexusGenRootTypes['Review']; // Review!
     addToCart: NexusGenRootTypes['Cart']; // Cart!
     addToWishlist: NexusGenRootTypes['Wishlist']; // Wishlist!
     buyCart: NexusGenRootTypes['BuyCartResponse'] | null; // BuyCartResponse
+    createBrand: NexusGenRootTypes['Brand']; // Brand!
     createProduct: NexusGenRootTypes['Product']; // Product!
     deleteReview: NexusGenRootTypes['Review']; // Review!
     login: NexusGenRootTypes['AuthType']; // AuthType!
@@ -132,11 +146,16 @@ export interface NexusGenFieldTypes {
     removeFromCart: NexusGenRootTypes['Cart']; // Cart!
     removeFromWishlist: boolean; // Boolean!
   }
-  OrderItem: { // field return type
+  Order: { // field return type
     id: number; // Int!
-    quantity: number; // Int!
-    subtotal: number; // Float!
-    unit_price: number; // Float!
+    status: string; // String!
+  }
+  OrderItem: { // field return type
+    id: number | null; // Int
+    productId: number | null; // Int
+    quantity: number | null; // Int
+    subtotal: number | null; // Float
+    unit_price: number | null; // Float
   }
   Product: { // field return type
     ImageDetail: NexusGenRootTypes['ProductImage'][]; // [ProductImage!]!
@@ -159,9 +178,11 @@ export interface NexusGenFieldTypes {
     Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
     fetchCart: Array<NexusGenRootTypes['Cart'] | null>; // [Cart]!
+    fetchOrderItems: Array<Array<NexusGenRootTypes['OrderItem'] | null> | null> | null; // [[OrderItem]]
     fetchProduct: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByBrand: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByCategory: NexusGenRootTypes['Product'][]; // [Product!]!
+    orderData: Array<NexusGenRootTypes['Order'] | null>; // [Order]!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
     userData: NexusGenRootTypes['User']; // User!
   }
@@ -175,9 +196,9 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     address: string | null; // String
     email: string; // String!
-    first_name: string; // String!
+    first_name: string | null; // String
     id: number; // Int!
-    last_name: string; // String!
+    last_name: string | null; // String
     phone_number: string | null; // String
     role: NexusGenEnums['UserRole']; // UserRole!
     username: string; // String!
@@ -206,11 +227,16 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     productId: 'Int'
   }
+  Category: { // field return type name
+    id: 'Int'
+    name: 'String'
+  }
   Mutation: { // field return type name
     addReview: 'Review'
     addToCart: 'Cart'
     addToWishlist: 'Wishlist'
     buyCart: 'BuyCartResponse'
+    createBrand: 'Brand'
     createProduct: 'Product'
     deleteReview: 'Review'
     login: 'AuthType'
@@ -218,8 +244,13 @@ export interface NexusGenFieldTypeNames {
     removeFromCart: 'Cart'
     removeFromWishlist: 'Boolean'
   }
+  Order: { // field return type name
+    id: 'Int'
+    status: 'String'
+  }
   OrderItem: { // field return type name
     id: 'Int'
+    productId: 'Int'
     quantity: 'Int'
     subtotal: 'Float'
     unit_price: 'Float'
@@ -245,9 +276,11 @@ export interface NexusGenFieldTypeNames {
     Review: 'Review'
     Wishlist: 'Wishlist'
     fetchCart: 'Cart'
+    fetchOrderItems: 'OrderItem'
     fetchProduct: 'Product'
     fetchProductByBrand: 'Product'
     fetchProductByCategory: 'Product'
+    orderData: 'Order'
     products: 'Product'
     userData: 'User'
   }
@@ -288,6 +321,9 @@ export interface NexusGenArgTypes {
     }
     addToWishlist: { // args
       productId: number; // Int!
+    }
+    createBrand: { // args
+      name: string; // String!
     }
     createProduct: { // args
       available: boolean; // Boolean!

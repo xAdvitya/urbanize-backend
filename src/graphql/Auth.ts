@@ -62,7 +62,12 @@ export const AuthMutation = extendType({
             .createQueryBuilder()
             .insert()
             .into(User)
-            .values({ username, email, password: hashedPassword })
+            .values({
+              username,
+              email,
+              password: hashedPassword,
+              role: 'USER',
+            })
             .returning('*')
             .execute();
 
