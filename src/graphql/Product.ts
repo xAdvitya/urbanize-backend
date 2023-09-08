@@ -84,10 +84,10 @@ export const createProductMutation = extendType({
       resolve(_parent, args, context: AuthPayload, _info): Promise<Product> {
         const { name, description, available, price, categoryId, brandId } =
           args;
-        const { userId } = context;
+        const { userId, role } = context;
 
-        if (!userId) {
-          throw new Error("can't create product without logging in");
+        if (!userId || role == 'USER') {
+          throw new Error("can't create brand without ADMIN previlage");
         }
 
         return Product.create({

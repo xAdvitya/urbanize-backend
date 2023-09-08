@@ -1,11 +1,4 @@
-import {
-  booleanArg,
-  extendType,
-  floatArg,
-  intArg,
-  objectType,
-  stringArg,
-} from 'nexus';
+import { extendType, objectType } from 'nexus';
 import { OrderItem } from '../entities/OrderItem';
 import { Order } from '../entities/Order';
 import { AuthPayload } from 'src/types/context';
@@ -26,7 +19,7 @@ export const OrderItemQuery = extendType({
       async resolve(_parent, _args, context: AuthPayload, _info) {
         const { userId } = context;
         if (!userId) {
-          throw new Error("can't create product without logging in");
+          throw new Error("can't order product without logging in");
         }
 
         const orders = await Order.find({ where: { creatorId: userId } });

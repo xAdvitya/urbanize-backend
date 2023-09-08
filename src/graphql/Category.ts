@@ -19,8 +19,14 @@ export const CategoryQuery = extendType({
       args: {
         categoryId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
+      resolve(_parent, args, context: AuthPayload, _info): Promise<Product[]> {
         const { categoryId } = args;
+        const { userId, role } = context;
+
+        if (!userId || role == 'USER') {
+          throw new Error("can't create category without ADMIN previlage");
+        }
+
         return Product.find({ where: { categoryId: categoryId } });
       },
     });

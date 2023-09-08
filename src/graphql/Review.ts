@@ -43,12 +43,16 @@ export const addReviewMutation = extendType({
         rating: nonNull(intArg()),
         review_text: nonNull(stringArg()),
       },
-      resolve(_parent, args, context, _info): Promise<Review> {
+      resolve(_parent, args, context: AuthPayload, _info): Promise<Review> {
         const { productId, title, rating, review_text } = args;
-        const { userId } = context;
+        const { userId, role } = context;
 
         if (!userId) {
           throw new Error("Can't add product to wishlist without logging in");
+        }
+
+        if (role == 'ADMIN') {
+          throw new Error("can't add reviews as an Admin");
         }
 
         const review = Review.create({

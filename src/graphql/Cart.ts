@@ -19,7 +19,7 @@ export const cartQuery = extendType({
   definition(t) {
     t.nonNull.list.field('fetchCart', {
       type: 'Cart',
-      resolve(_parent, args, context: AuthPayload, _info): Promise<Cart[]> {
+      resolve(_parent, _args, context: AuthPayload, _info): Promise<Cart[]> {
         const { userId } = context;
 
         if (!userId) {
