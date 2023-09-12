@@ -88,9 +88,9 @@ export interface NexusGenObjects {
   User: { // root type
     address?: string | null; // String
     email: string; // String!
-    first_name?: string | null; // String
+    first_name: string; // String!
     id: number; // Int!
-    last_name?: string | null; // String
+    last_name: string; // String!
     phone_number?: string | null; // String
     role: NexusGenEnums['UserRole']; // UserRole!
     username: string; // String!
@@ -145,6 +145,7 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['AuthType']; // AuthType!
     removeFromCart: NexusGenRootTypes['Cart']; // Cart!
     removeFromWishlist: boolean; // Boolean!
+    updateUserData: NexusGenRootTypes['User']; // User!
   }
   Order: { // field return type
     id: number; // Int!
@@ -196,9 +197,9 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     address: string | null; // String
     email: string; // String!
-    first_name: string | null; // String
+    first_name: string; // String!
     id: number; // Int!
-    last_name: string | null; // String
+    last_name: string; // String!
     phone_number: string | null; // String
     role: NexusGenEnums['UserRole']; // UserRole!
     username: string; // String!
@@ -243,6 +244,7 @@ export interface NexusGenFieldTypeNames {
     register: 'AuthType'
     removeFromCart: 'Cart'
     removeFromWishlist: 'Boolean'
+    updateUserData: 'User'
   }
   Order: { // field return type name
     id: 'Int'
@@ -342,6 +344,8 @@ export interface NexusGenArgTypes {
     }
     register: { // args
       email: string; // String!
+      first_name: string; // String!
+      last_name: string; // String!
       password: string; // String!
       username: string; // String!
     }
@@ -350,6 +354,12 @@ export interface NexusGenArgTypes {
     }
     removeFromWishlist: { // args
       productId: number; // Int!
+    }
+    updateUserData: { // args
+      address?: string | null; // String
+      first_name: string; // String!
+      last_name: string; // String!
+      phone_number?: string | null; // String
     }
   }
   Query: {
