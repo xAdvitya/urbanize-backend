@@ -30,7 +30,7 @@ export const userQuery = extendType({
       args: {
         userId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: AuthPayload, _info): Promise<User> {
+      resolve(_parent, args, _context, _info): Promise<User> {
         const { userId } = args;
         return User.findOne({ where: { id: userId } });
       },

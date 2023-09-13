@@ -1,7 +1,6 @@
 import { extendType, intArg, nonNull, objectType, stringArg } from 'nexus';
 import { AuthPayload } from 'src/types/context';
 import { Product } from '../entities/Product';
-import { Order } from '../entities/Order';
 import { Brand } from '../entities/Brand';
 
 export const BrandType = objectType({
@@ -20,7 +19,7 @@ export const BrandQuery = extendType({
       args: {
         brandId: nonNull(intArg()),
       },
-      resolve(_parent, args, _context: AuthPayload, _info): Promise<Product[]> {
+      resolve(_parent, args, _context, _info): Promise<Product[]> {
         const { brandId } = args;
         return Product.find({ where: { brandId: brandId } });
       },

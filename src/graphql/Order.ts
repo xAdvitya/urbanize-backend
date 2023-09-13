@@ -1,6 +1,4 @@
-import { Product } from '../entities/Product';
 import { AuthPayload } from 'src/types/context';
-import { User } from '../entities/User';
 import { extendType, objectType } from 'nexus';
 import { Order } from '../entities/Order';
 

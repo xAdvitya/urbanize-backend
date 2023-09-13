@@ -21,7 +21,7 @@ export const ReviewQuery = extendType({
       args: {
         productId: nonNull(intArg()),
       },
-      resolve(_parent, args, context: AuthPayload, _info): Promise<Review[]> {
+      resolve(_parent, args, _context, _info): Promise<Review[]> {
         const { productId } = args;
         return Review.find({
           where: { product: { id: productId } },

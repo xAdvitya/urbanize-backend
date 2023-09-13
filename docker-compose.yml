@@ -10,7 +10,7 @@ services:
       # so this ensures our database is loaded first
       - postgres
     environment:
-      - DATABASE_URL=postgresql://postgres:password@localhost:5432/urbanize
+      - DATABASE_URL=postgresql://postgres:password@my-postgres-container:5432/urbanize
     ports:
       - '8080:8080'
     volumes:
@@ -22,10 +22,11 @@ services:
       - /usr/src/app/node_modules
 
   # This is the configuration for our PostgreSQL database container
-  # Note the `postgres` name is important, in out Node app when we refer
-  # to  `host: "postgres"` that value is mapped on the network to the
+  # Note the `postgres` name is important, in our Node app when we refer
+  # to `host: "postgres"` that value is mapped on the network to the
   # address of this container.
   postgres:
+    container_name: my-postgres-container # Set the container name
     image: postgres:14.1-alpine
     restart: always
     environment:

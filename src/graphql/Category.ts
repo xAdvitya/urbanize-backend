@@ -1,7 +1,6 @@
 import { extendType, intArg, nonNull, objectType } from 'nexus';
 import { AuthPayload } from 'src/types/context';
 import { Product } from '../entities/Product';
-import { Order } from '../entities/Order';
 
 export const CategoryType = objectType({
   name: 'Category',

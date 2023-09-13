@@ -1,15 +1,6 @@
-import {
-  booleanArg,
-  extendType,
-  floatArg,
-  intArg,
-  nonNull,
-  objectType,
-  stringArg,
-} from 'nexus';
+import { extendType, intArg, nonNull, objectType } from 'nexus';
 import { Product } from '../entities/Product';
-import { AuthPayload, CustomContext } from '../types/context';
-import { User } from '../entities/User';
+import { AuthPayload } from '../types/context';
 import { Wishlist } from '../entities/Wishlist';
 
 export const WishlistType = objectType({

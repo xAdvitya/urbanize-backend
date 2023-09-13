@@ -23,21 +23,14 @@ const boot = async () => {
     context: ({ req }) => {
       const context: CustomContext = { req, conn };
       const authorizationHeader = req.headers.authorization;
-      // try {
       if (authorizationHeader) {
         const token = authorizationHeader.split(' ')[1];
         if (token) {
           const payload = verifyToken(token);
-          // console.log(payload);
           context.userId = payload.userId;
           context.role = payload.role;
         }
       }
-      // }
-      // catch (error) {
-      //   console.error(error);
-      // }
-      // console.log(context);
       return context;
     },
   });

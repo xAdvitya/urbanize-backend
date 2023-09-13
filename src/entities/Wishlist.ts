@@ -17,10 +17,14 @@ export class Wishlist extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Column()
+  creatorId!: number;
   @ManyToOne(() => User, (user) => user.wishlist)
   @JoinColumn({ name: 'creatorId' })
   creator: User;
 
+  @Column()
+  productId!: number;
   @ManyToOne(() => Product, (product) => product.wishlist)
   @JoinColumn({ name: 'productId' })
   product: Product;
