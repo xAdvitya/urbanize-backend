@@ -145,6 +145,7 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['AuthType']; // AuthType!
     removeFromCart: NexusGenRootTypes['Cart']; // Cart!
     removeFromWishlist: boolean; // Boolean!
+    updateProduct: NexusGenRootTypes['Product']; // Product!
     updateUserData: NexusGenRootTypes['User']; // User!
   }
   Order: { // field return type
@@ -244,6 +245,7 @@ export interface NexusGenFieldTypeNames {
     register: 'AuthType'
     removeFromCart: 'Cart'
     removeFromWishlist: 'Boolean'
+    updateProduct: 'Product'
     updateUserData: 'User'
   }
   Order: { // field return type name
@@ -332,6 +334,7 @@ export interface NexusGenArgTypes {
       brandId: number; // Int!
       categoryId: number; // Int!
       description: string; // String!
+      id: number; // Int!
       name: string; // String!
       price: number; // Float!
     }
@@ -353,6 +356,15 @@ export interface NexusGenArgTypes {
       productId: number; // Int!
     }
     removeFromWishlist: { // args
+      productId: number; // Int!
+    }
+    updateProduct: { // args
+      available: boolean; // Boolean!
+      brandId: number; // Int!
+      categoryId: number; // Int!
+      description: string; // String!
+      name: string; // String!
+      price: number; // Float!
       productId: number; // Int!
     }
     updateUserData: { // args

@@ -1,5 +1,5 @@
 import { extendType, nonNull, objectType, stringArg } from 'nexus';
-import { AuthPayload, CustomContext } from '../types/context'; // Update the import path
+import { AuthPayload, CustomContext } from '../types/context';
 import argon2 from 'argon2';
 import * as jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';

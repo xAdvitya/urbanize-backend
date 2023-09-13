@@ -74,6 +74,7 @@ export const createProductMutation = extendType({
     t.nonNull.field('createProduct', {
       type: 'Product',
       args: {
+        id: nonNull(intArg()),
         name: nonNull(stringArg()),
         description: nonNull(stringArg()),
         available: nonNull(booleanArg()),
@@ -99,6 +100,59 @@ export const createProductMutation = extendType({
           categoryId,
           brandId,
         }).save();
+      },
+    });
+  },
+});
+
+export const updateProductMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('updateProduct', {
+      type: 'Product',
+      args: {
+        productId: nonNull(intArg()),
+        name: nonNull(stringArg()),
+        description: nonNull(stringArg()),
+        available: nonNull(booleanArg()),
+        price: nonNull(floatArg()),
+        categoryId: nonNull(intArg()),
+        brandId: nonNull(intArg()),
+      },
+      async resolve(_parent, args, context: AuthPayload, _info) {
+        const {
+          productId,
+          name,
+          description,
+          available,
+          price,
+          categoryId,
+          brandId,
+        } = args;
+        const { userId, role } = context;
+
+        if (!userId || role == 'USER') {
+          throw new Error("can't create brand without ADMIN previlage");
+        }
+
+        const productToUpdate = await Product.findOne({
+          where: { id: productId },
+        });
+
+        if (!productToUpdate) {
+          throw new Error('Product not found');
+        }
+
+        productToUpdate.name = name;
+        productToUpdate.description = description;
+        productToUpdate.available = available;
+        productToUpdate.price = price;
+        productToUpdate.categoryId = categoryId;
+        productToUpdate.brandId = brandId;
+
+        await productToUpdate.save();
+
+        return productToUpdate;
       },
     });
   },

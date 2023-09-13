@@ -34,12 +34,13 @@ type Mutation {
   addToWishlist(productId: Int!): Wishlist!
   buyCart: BuyCartResponse
   createBrand(name: String!): Brand!
-  createProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, name: String!, price: Float!): Product!
+  createProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, id: Int!, name: String!, price: Float!): Product!
   deleteReview(reviewId: Int!): Review!
   login(password: String!, username: String!): AuthType!
   register(email: String!, first_name: String!, last_name: String!, password: String!, username: String!): AuthType!
   removeFromCart(productId: Int!): Cart!
   removeFromWishlist(productId: Int!): Boolean!
+  updateProduct(available: Boolean!, brandId: Int!, categoryId: Int!, description: String!, name: String!, price: Float!, productId: Int!): Product!
   updateUserData(address: String, first_name: String!, last_name: String!, phone_number: String): User!
 }
 
