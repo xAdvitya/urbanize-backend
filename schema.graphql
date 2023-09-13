@@ -77,13 +77,14 @@ type ProductImage {
 }
 
 type Query {
-  Review(productId: Int!): [Review!]!
   Wishlist: [Wishlist!]!
   fetchCart: [Cart]!
   fetchOrderItems: [[OrderItem]]
   fetchProduct(productId: Int): [Product!]!
   fetchProductByBrand(brandId: Int!): [Product!]!
   fetchProductByCategory(categoryId: Int!): [Product!]!
+  fetchReview(productId: Int!): [Review!]!
+  fetchUserReviw(userId: Int): [Review]!
   orderData: [Order]!
   products(searchKeyword: String): [Product!]!
   userData(userId: Int!): User!

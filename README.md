@@ -1,8 +1,9 @@
 # Urbanize E-Commerce Backend
 
-![GitHub](https://img.shields.io/github/license/your-username/urbanize-backend)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/your-username/urbanize-backend/CI)
-![GitHub last commit](https://img.shields.io/github/last-commit/your-username/urbanize-backend)
+![nodejs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![graphql](https://img.shields.io/badge/GraphQL-E10098.svg?style=for-the-badge&logo=GraphQL&logoColor=white)
 
 Welcome to the backend repository of Urbanize E-Commerce, a powerful and flexible e-commerce platform.
 
@@ -28,10 +29,9 @@ Urbanize E-Commerce Backend is the backend server component of a modern e-commer
 
 - User authentication and authorization
 - Product and category management
-- Brand management
-- Product image uploading and management
 - Shopping cart and order processing
 - Search and filtering functionality
+<!--
 
 ## Getting Started
 
@@ -48,4 +48,4 @@ Urbanize E-Commerce Backend is the backend server component of a modern e-commer
    git clone https://github.com/your-username/urbanize-backend.git
    ```
 
-2.
+2. -->

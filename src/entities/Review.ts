@@ -25,12 +25,16 @@ export class Review extends BaseEntity {
   @Column()
   review_text!: string;
 
+  @Column()
+  creatorId!: number;
   @ManyToOne(() => User, (user) => user.review)
-  @JoinColumn({ name: 'creator_id' })
+  @JoinColumn({ name: 'creatorId' })
   creator: User;
 
+  @Column()
+  productId!: number;
   @ManyToOne(() => Product, (product) => product.review)
-  @JoinColumn({ name: 'product_id' })
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @CreateDateColumn()

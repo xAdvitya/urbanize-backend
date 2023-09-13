@@ -25,7 +25,7 @@ export const ProductType = objectType({
     t.nonNull.int('categoryId');
     t.nonNull.int('brandId');
 
-    t.nonNull.list.nonNull.field('ImageDetail', {
+    t.nonNull.list.field('ImageDetail', {
       type: 'ProductImage',
       resolve(parent, _args, _context, _info): Promise<ProductImage[] | null> {
         return ProductImage.find({ where: { productId: parent.id } });

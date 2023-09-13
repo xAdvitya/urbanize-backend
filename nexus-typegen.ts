@@ -177,13 +177,14 @@ export interface NexusGenFieldTypes {
     productId: number | null; // Int
   }
   Query: { // field return type
-    Review: NexusGenRootTypes['Review'][]; // [Review!]!
     Wishlist: NexusGenRootTypes['Wishlist'][]; // [Wishlist!]!
     fetchCart: Array<NexusGenRootTypes['Cart'] | null>; // [Cart]!
     fetchOrderItems: Array<Array<NexusGenRootTypes['OrderItem'] | null> | null> | null; // [[OrderItem]]
     fetchProduct: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByBrand: NexusGenRootTypes['Product'][]; // [Product!]!
     fetchProductByCategory: NexusGenRootTypes['Product'][]; // [Product!]!
+    fetchReview: NexusGenRootTypes['Review'][]; // [Review!]!
+    fetchUserReviw: Array<NexusGenRootTypes['Review'] | null>; // [Review]!
     orderData: Array<NexusGenRootTypes['Order'] | null>; // [Order]!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
     userData: NexusGenRootTypes['User']; // User!
@@ -277,13 +278,14 @@ export interface NexusGenFieldTypeNames {
     productId: 'Int'
   }
   Query: { // field return type name
-    Review: 'Review'
     Wishlist: 'Wishlist'
     fetchCart: 'Cart'
     fetchOrderItems: 'OrderItem'
     fetchProduct: 'Product'
     fetchProductByBrand: 'Product'
     fetchProductByCategory: 'Product'
+    fetchReview: 'Review'
+    fetchUserReviw: 'Review'
     orderData: 'Order'
     products: 'Product'
     userData: 'User'
@@ -375,9 +377,6 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    Review: { // args
-      productId: number; // Int!
-    }
     fetchProduct: { // args
       productId?: number | null; // Int
     }
@@ -386,6 +385,12 @@ export interface NexusGenArgTypes {
     }
     fetchProductByCategory: { // args
       categoryId: number; // Int!
+    }
+    fetchReview: { // args
+      productId: number; // Int!
+    }
+    fetchUserReviw: { // args
+      userId?: number | null; // Int
     }
     products: { // args
       searchKeyword?: string | null; // String

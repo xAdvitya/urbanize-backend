@@ -16,7 +16,7 @@ export const ReviewType = objectType({
 export const ReviewQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.nonNull.field('Review', {
+    t.nonNull.list.nonNull.field('fetchReview', {
       type: 'Review',
       args: {
         productId: nonNull(intArg()),
@@ -27,6 +27,34 @@ export const ReviewQuery = extendType({
           where: { product: { id: productId } },
           relations: ['product'],
         });
+      },
+    });
+  },
+});
+
+export const fetchUserReviewQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.field('fetchUserReviw', {
+      type: 'Review',
+      args: {
+        userId: intArg(),
+      },
+      async resolve(_parent, args, context: AuthPayload, _info) {
+        const { userId } = context;
+        let userReviews;
+        if (!args.userId) {
+          if (!userId) {
+            throw new Error("Can't add product to wishlist without logging in");
+          }
+          userReviews = await Review.find({ where: { creatorId: userId } });
+        } else {
+          userReviews = await Review.find({
+            where: { creatorId: args.userId },
+          });
+        }
+
+        return userReviews;
       },
     });
   },
