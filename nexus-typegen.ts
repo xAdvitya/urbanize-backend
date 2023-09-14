@@ -160,7 +160,7 @@ export interface NexusGenFieldTypes {
     unit_price: number | null; // Float
   }
   Product: { // field return type
-    ImageDetail: NexusGenRootTypes['ProductImage'][]; // [ProductImage!]!
+    ImageDetail: Array<NexusGenRootTypes['ProductImage'] | null>; // [ProductImage]!
     available: boolean; // Boolean!
     brandId: number; // Int!
     categoryId: number; // Int!
