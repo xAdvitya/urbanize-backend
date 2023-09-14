@@ -16,7 +16,6 @@ Welcome to the backend repository of Urbanize E-Commerce, a powerful and flexibl
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
-  - [Database Setup](#database-setup)
 - [Usage](#usage)
 - [API Documentation](#api-documentation)
 - [Contributing](#contributing)
@@ -52,4 +51,33 @@ Urbanize E-Commerce Backend is the backend server component of a modern e-commer
    git clone https://github.com/your-username/urbanize-backend.git
    ```
 
-2.
+2. Change directory to the project folder:
+
+   ```
+   cd urbanize-backend
+   ```
+
+3. Install the project dependencies:
+   ```
+   yarn install
+   ```
+
+### Configuration
+
+1. Create a `.env` file in the project root and configure your environment variables.You can use the `.env.example` file as a template.
+
+2. Modify the `.env` file with your own settings:
+
+   #### Database connection URL
+
+   `DATABASE_URL=postgresql://your-username:your-password@your-host:your-port/your-database-name`
+
+   #### JWT secret key
+
+   `JWT_SECRET=your-secret-key`
+
+### Usage
+
+To start the Urbanize E-Commerce Backend, run the following command:
+
+`yarn dev`
