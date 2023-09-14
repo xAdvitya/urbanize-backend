@@ -11,6 +11,7 @@ Welcome to the backend repository of Urbanize E-Commerce, a powerful and flexibl
 
 - [About](#about)
 - [Features](#features)
+- [Database design](#database)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -31,6 +32,11 @@ Urbanize E-Commerce Backend is the backend server component of a modern e-commer
 - Product and category management
 - Shopping cart and order processing
 - Search and filtering functionality
+
+## Database Design
+![urbanize drawio(1)](https://github.com/xAdvitya/urbanize-backend/assets/54709416/617095be-6e9b-4a20-aab1-10688cba1661)
+
+
 <!--
 
 ## Getting Started
