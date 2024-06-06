@@ -17,9 +17,6 @@ Welcome to the backend repository of Urbanize E-Commerce, a powerful and flexibl
   - [Installation](#installation)
   - [Configuration](#configuration)
 - [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## About
 
